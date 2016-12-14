@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project SYSTEM "mga.dtd">
+
+<project guid="{D58BB407-6985-4751-9405-E22C3EED3739}" cdate="Tue Dec 13 16:25:36 2016" mdate="Tue Dec 13 16:25:36 2016" version="" metaguid="{67FE9C02-2AE2-422B-B9A2-7929BBC24E79}" metaversion="" metaname="ValueFlow">
+	<name>RootFolder</name>
+	<comment></comment>
+	<author></author>
+	<folder id="id-006a-00000001" relid="0x1" childrelidcntr="0x1" kind="RootFolder" guid="{69059ef5-8ece-4cc6-98f6-532abc4abc0c}">
+		<name>RootFolder</name>
+		<regnode name="ConstraintManagerSettings" status="undefined">
+			<value></value>
+			<regnode name="ModelDepth" isopaque="yes">
+				<value>0</value>
+			</regnode>
+			<regnode name="ShortCircuitIterators" isopaque="yes">
+				<value>yes</value>
+			</regnode>
+			<regnode name="ShortCircuitLogicalOperators" isopaque="yes">
+				<value>yes</value>
+			</regnode>
+			<regnode name="Tracking" isopaque="yes">
+				<value>yes</value>
+			</regnode>
+			<regnode name="ViolationCount" isopaque="yes">
+				<value>-2</value>
+			</regnode>
+		</regnode>
+		<model id="id-0065-00000001" kind="Component" guid="{d00c475a-a990-48a7-9560-87919401a2c0}" relid="0x1" childrelidcntr="0x1d">
+			<name>Car</name>
+			<model id="id-0065-00000002" kind="Component" role="Component" guid="{bbba164b-1fa7-486e-8db9-2e060c1981cc}" relid="0x1" childrelidcntr="0x3">
+				<name>Engine</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>147,105</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<atom id="id-0066-00000002" kind="Parameter" role="Parameter" guid="{8cdfe69b-efd6-493a-b1d1-9a094d3cf63c}" relid="0x1">
+					<name>Cylinders</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>252,105</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Name" status="meta">
+						<value></value>
+					</attribute>
+					<attribute kind="Value">
+						<value>6</value>
+					</attribute>
+				</atom>
+				<atom id="id-0066-00000003" kind="Parameter" role="Parameter" guid="{3bb81480-7481-4263-ae71-b076ee22349b}" relid="0x2">
+					<name>Volume</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>252,168</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Name">
+						<value></value>
+					</attribute>
+					<attribute kind="Value">
+						<value>3.0</value>
+					</attribute>
+				</atom>
+				<atom id="id-0066-00000004" kind="Parameter" role="Parameter" guid="{9c144139-dde2-4223-b434-e04fda537f79}" relid="0x3">
+					<name>HorsePower</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>252,231</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Name" status="meta">
+						<value></value>
+					</attribute>
+					<attribute kind="Value">
+						<value>186</value>
+					</attribute>
+				</atom>
+			</model>
+			<model id="id-0065-00000003" kind="Component" role="Component" guid="{46d6609b-e4d2-4781-ae40-bdfdc63962d7}" relid="0x2" childrelidcntr="0x8">
+				<name>DriveTrain</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>147,294</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<model id="id-0065-00000005" kind="Component" role="Component" guid="{4f14e28f-1c21-430f-9cab-f196e7cbd526}" relid="0x1" childrelidcntr="0x2">
+					<name>Transmission</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>259,119</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<atom id="id-0066-00000005" kind="Parameter" role="Parameter" guid="{6e630aae-0702-49a9-be78-ef71b60072cf}" relid="0x1">
+						<name>Length</name>
+						<regnode name="PartRegs" status="undefined">
+							<value></value>
+							<regnode name="Main" status="undefined">
+								<value></value>
+								<regnode name="Position" isopaque="yes">
+									<value>266,231</value>
+								</regnode>
+							</regnode>
+						</regnode>
+						<attribute kind="Name" status="meta">
+							<value></value>
+						</attribute>
+						<attribute kind="Value">
+							<value>100</value>
+						</attribute>
+					</atom>
+					<atom id="id-0066-00000006" kind="Parameter" role="Parameter" guid="{62a55328-a51f-4cff-a16d-a8b2fa4511ba}" relid="0x2">
+						<name>Mass</name>
+						<regnode name="PartRegs" status="undefined">
+							<value></value>
+							<regnode name="Main" status="undefined">
+								<value></value>
+								<regnode name="Position" isopaque="yes">
+									<value>266,294</value>
+								</regnode>
+							</regnode>
+						</regnode>
+						<attribute kind="Name" status="meta">
+							<value></value>
+						</attribute>
+						<attribute kind="Value">
+							<value>100</value>
+						</attribute>
+					</atom>
+				</model>
+				<model id="id-0065-00000006" kind="Component" role="Component" guid="{ca006830-c46f-41d6-ae9c-e60dc1e2f943}" relid="0x2" childrelidcntr="0x1">
+					<name>Rear Axle</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>259,259</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<atom id="id-0066-00000001" kind="Parameter" role="Parameter" guid="{22d3d4fa-b1f5-4044-a7cf-1f9d74db83dc}" relid="0x1">
+						<name>Length</name>
+						<regnode name="PartRegs" status="undefined">
+							<value></value>
+							<regnode name="Main" status="undefined">
+								<value></value>
+								<regnode name="Position" isopaque="yes">
+									<value>266,105</value>
+								</regnode>
+							</regnode>
+						</regnode>
+						<attribute kind="Name" status="meta">
+							<value></value>
+						</attribute>
+						<attribute kind="Value">
+							<value>24</value>
+						</attribute>
+					</atom>
+				</model>
+				<atom id="id-0066-00000007" kind="Parameter" role="Parameter" guid="{c161daed-0d68-4c71-9449-5e05c4dbdeea}" relid="0x3">
+					<name>TransLength</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>539,133</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Name" status="meta">
+						<value></value>
+					</attribute>
+					<attribute kind="Value" status="meta">
+						<value></value>
+					</attribute>
+				</atom>
+				<atom id="id-0066-00000008" kind="Parameter" role="Parameter" guid="{dd1a246d-5fa2-4d55-8fd9-a8b352426c59}" relid="0x4">
+					<name>TransMass</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>539,196</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Name" status="meta">
+						<value></value>
+					</attribute>
+					<attribute kind="Value" status="meta">
+						<value></value>
+					</attribute>
+				</atom>
+				<atom id="id-0066-00000009" kind="Parameter" role="Parameter" guid="{e689b113-0fc8-4e8f-9542-ad07d4ede3e0}" relid="0x5">
+					<name>AxleLength</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>539,294</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Name" status="meta">
+						<value></value>
+					</attribute>
+					<attribute kind="Value" status="meta">
+						<value></value>
+					</attribute>
+				</atom>
+				<connection id="id-0068-00000009" kind="Flow" role="Flow" guid="{07f1f86e-5be3-41f0-b01e-64dac07ef905}" relid="0x6">
+					<name>Flow</name>
+					<connpoint role="dst" target="id-0066-00000005"/>
+					<connpoint role="src" target="id-0066-00000007"/>
+				</connection>
+				<connection id="id-0068-0000000a" kind="Flow" role="Flow" guid="{7fcb1b17-b26b-4226-8ebd-4911b93c1e71}" relid="0x7">
+					<name>Flow</name>
+					<connpoint role="dst" target="id-0066-00000006"/>
+					<connpoint role="src" target="id-0066-00000008"/>
+				</connection>
+				<connection id="id-0068-0000000b" kind="Flow" role="Flow" guid="{147011fc-4631-4a08-97f3-36b50d4efb75}" relid="0x8">
+					<name>Flow</name>
+					<connpoint role="dst" target="id-0066-00000001"/>
+					<connpoint role="src" target="id-0066-00000009"/>
+				</connection>
+			</model>
+			<model id="id-0065-00000004" kind="Component" role="Component" guid="{b4691e13-751b-4823-9020-9c97aa196895}" relid="0x3" childrelidcntr="0x1">
+				<name>Body</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>140,483</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<atom id="id-0066-0000000a" kind="Parameter" role="Parameter" guid="{9f71d5e5-eb97-4c02-b10a-c6606a66c865}" relid="0x1">
+					<name>Color</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>294,203</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Name" status="meta">
+						<value></value>
+					</attribute>
+					<attribute kind="Value" status="meta">
+						<value></value>
+					</attribute>
+				</atom>
+			</model>
+			<atom id="id-0066-0000000b" kind="Parameter" role="Parameter" guid="{0cfd63a3-07ba-4d4e-8913-0199bd724414}" relid="0x4">
+				<name>Color</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>483,497</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<attribute kind="Value" status="meta">
+					<value></value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000000c" kind="Parameter" role="Parameter" guid="{fe04769e-cc20-4db4-bb47-d4002d0cb4ee}" relid="0x5">
+				<name>TransLength</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>483,273</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<attribute kind="Value" status="meta">
+					<value></value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000000d" kind="Parameter" role="Parameter" guid="{67a36821-8b61-4728-8131-82419a2eb9eb}" relid="0x6">
+				<name>TransMass</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>483,336</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<attribute kind="Value" status="meta">
+					<value></value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000000e" kind="Parameter" role="Parameter" guid="{e4f4cc17-e3f5-4a96-b739-a0f5ff9f1fa6}" relid="0x7">
+				<name>AxleLength</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>483,399</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<attribute kind="Value" status="meta">
+					<value></value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000000f" kind="Parameter" role="Parameter" guid="{2d46aaa3-7ea3-4fc5-bec5-251018aa3dad}" relid="0x8">
+				<name>EngCylinders</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>483,70</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<attribute kind="Value">
+					<value>6</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-00000010" kind="Parameter" role="Parameter" guid="{e722688f-c523-4df9-ac51-e7cd2efcc774}" relid="0x9">
+				<name>EngHorsePower</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>483,196</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<attribute kind="Value">
+					<value>186</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-00000011" kind="Parameter" role="Parameter" guid="{bf566059-8478-4e2d-b4b8-aabee9ad61d4}" relid="0xa">
+				<name>EngVolume</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>483,133</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Name">
+					<value></value>
+				</attribute>
+				<attribute kind="Value">
+					<value>3.0</value>
+				</attribute>
+			</atom>
+			<connection id="id-0068-00000004" kind="Flow" role="Flow" guid="{065be087-d7a1-46ae-b382-f9046c2910c3}" relid="0xe">
+				<name>Flow</name>
+				<connpoint role="dst" target="id-0066-00000004"/>
+				<connpoint role="src" target="id-0066-00000010"/>
+			</connection>
+			<connection id="id-0068-00000005" kind="Flow" role="Flow" guid="{d7b8202d-3313-4440-8dff-bec450c647ef}" relid="0xf">
+				<name>Flow</name>
+				<connpoint role="dst" target="id-0066-00000007"/>
+				<connpoint role="src" target="id-0066-0000000c"/>
+			</connection>
+			<connection id="id-0068-00000006" kind="Flow" role="Flow" guid="{fee1d423-bd34-426f-8184-bb6cbeeb4cb1}" relid="0x10">
+				<name>Flow</name>
+				<connpoint role="dst" target="id-0066-00000008"/>
+				<connpoint role="src" target="id-0066-0000000d"/>
+			</connection>
+			<connection id="id-0068-00000007" kind="Flow" role="Flow" guid="{6f79d2f4-0a00-492d-8230-73073a53dec0}" relid="0x11">
+				<name>Flow</name>
+				<connpoint role="dst" target="id-0066-00000009"/>
+				<connpoint role="src" target="id-0066-0000000e"/>
+			</connection>
+			<connection id="id-0068-00000008" kind="Flow" role="Flow" guid="{c7b5c21c-e5bb-40b0-aa4b-7ce358244cec}" relid="0x12">
+				<name>Flow</name>
+				<connpoint role="dst" target="id-0066-0000000a"/>
+				<connpoint role="src" target="id-0066-0000000b"/>
+			</connection>
+			<connection id="id-0068-00000013" kind="Flow" role="Flow" guid="{60cbc964-3692-4614-aa8c-9a2d140d5a7a}" relid="0x1b">
+				<name>Flow</name>
+				<connpoint role="dst" target="id-0066-00000003"/>
+				<connpoint role="src" target="id-0066-00000011"/>
+			</connection>
+			<connection id="id-0068-00000015" kind="Flow" role="Flow" guid="{d678b49e-69b9-4bc3-8a84-b0aec40393ea}" relid="0x1d">
+				<name>Flow</name>
+				<connpoint role="dst" target="id-0066-00000003"/>
+				<connpoint role="src" target="id-0066-0000000f"/>
+			</connection>
+		</model>
+	</folder>
+</project>
