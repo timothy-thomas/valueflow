@@ -7,4 +7,5 @@ def optimizeContainer(L1, W1, H1, L2, W2, H2)
     newLength = L1 + L2
     newWidth = W1 + W2
     newHeight = H1 + H2
-    return [newLength, newWidth, newHeight]
+    newVolume = newLength * newWidth * newHeight
+    return [newLength, newWidth, newHeight, newVolume]

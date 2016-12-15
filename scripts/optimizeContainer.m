@@ -1,4 +1,4 @@
-function [Length, Width, Height] = OptimizeContainer(L1, W1, H1, L2, W2, H2)
+function [Length, Width, Height, Volume] = OptimizeContainer(L1, W1, H1, L2, W2, H2)
 %% OptimizeContainer Model
 %
 % This function optimizes the container size necessary to carry
@@ -8,5 +8,6 @@ function [Length, Width, Height] = OptimizeContainer(L1, W1, H1, L2, W2, H2)
 Length = L1 + L2
 Width  = W1 + W2
 Height = H1 + H2
+Volume = Length * Width * Height
 
 end
