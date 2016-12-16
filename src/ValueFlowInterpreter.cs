@@ -8,8 +8,8 @@ using GME.CSharp;
 using GME;
 using GME.MGA;
 using GME.MGA.Core;
-//using CyPhy = ISIS.GME.Dsml.CyPhyML.Interfaces;
-//using CyPhyClasses = ISIS.GME.Dsml.CyPhyML.Classes;
+using VF = ISIS.GME.Dsml.ValueFlow.Interfaces;
+using VFClasses = ISIS.GME.Dsml.ValueFlow.Classes;
 using System.Windows.Forms;
 
 using System.Collections;
@@ -81,7 +81,12 @@ namespace ValueFlowInterpreter
             // if (currentobj.Meta.Name == "KindName")
             // [ParadigmName].[KindName] dsCurrentObj = ISIS.GME.Dsml.[ParadigmName].Classes.[KindName].Cast(currentobj);			
             
-            
+            if (currentobj.Meta.Name == "")
+            {
+                VF.Component dsCurrentObj = VFClasses.Component.Cast(currentobj);
+
+                Console.Out.Write(dsCurrentObj.Name);
+            }
 
         }
 

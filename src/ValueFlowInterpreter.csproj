@@ -82,6 +82,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentConfig.cs" />
+    <Compile Include="ISIS.GME.Dsml.ValueFlow.Classes.cs" />
+    <Compile Include="ISIS.GME.Dsml.ValueFlow.Interfaces.cs" />
     <Compile Include="MgaGateway.cs" />
     <Compile Include="ValueFlowInterpreter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
