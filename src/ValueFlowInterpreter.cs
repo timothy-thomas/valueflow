@@ -47,6 +47,7 @@ namespace ValueFlowInterpreter
         /// <param name="project">The handle of the project opened in GME, for which the interpreter was called.</param>
         public void Initialize(MgaProject project)
         {
+            MgaGateway = new MgaGateway(project);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace ValueFlowInterpreter
             // if (currentobj.Meta.Name == "KindName")
             // [ParadigmName].[KindName] dsCurrentObj = ISIS.GME.Dsml.[ParadigmName].Classes.[KindName].Cast(currentobj);			
             
-            if (currentobj.Meta.Name == "")
+            if (currentobj.Meta.Name == "Component")
             {
                 VF.Component dsCurrentObj = VFClasses.Component.Cast(currentobj);
 

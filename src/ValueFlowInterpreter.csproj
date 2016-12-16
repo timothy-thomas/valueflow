@@ -81,9 +81,13 @@
     <Reference Include="GME.MGA.Meta, Version=1.0.1.0, Culture=neutral, PublicKeyToken=f240a760fe751c2e, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ISIS.GME.Dsml.ValueFlow.Classes.cs">
+      <Link>ISIS.GME.Dsml.ValueFlow.Classes.cs</Link>
+    </Compile>
+    <Compile Include="..\ISIS.GME.Dsml.ValueFlow.Interfaces.cs">
+      <Link>ISIS.GME.Dsml.ValueFlow.Interfaces.cs</Link>
+    </Compile>
     <Compile Include="ComponentConfig.cs" />
-    <Compile Include="ISIS.GME.Dsml.ValueFlow.Classes.cs" />
-    <Compile Include="ISIS.GME.Dsml.ValueFlow.Interfaces.cs" />
     <Compile Include="MgaGateway.cs" />
     <Compile Include="ValueFlowInterpreter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
