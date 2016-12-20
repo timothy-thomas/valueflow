@@ -50,6 +50,128 @@ namespace ValueFlowInterpreter
             MgaGateway = new MgaGateway(project);
         }
 
+        abstract class ValueFlowElement
+        {
+            public string name;
+            public System.Guid guid;
+            public bool known;
+            public string value;
+            public List<System.Guid> dependencies;
+        }
+        
+        class AssignmentLine : ValueFlowElement
+        {
+            public AssignmentLine(string nm, System.Guid id, string val)
+            {
+                name = nm;
+                guid = id;
+                known = true;
+                value = val;
+            }
+
+            public AssignmentLine(string nm, System.Guid id, System.Guid dep)
+            {
+                name = nm;
+                guid = id;
+                known = false;
+                dependencies = new List<System.Guid> { dep };
+            }
+        }
+
+        class Function : ValueFlowElement
+        {
+            public List<System.Guid> dependencies;
+            public enum FunctionType
+            {
+                SIMPLE = 0,
+                COMPLEX = 1,
+                PYTHON = 2
+            }
+            public FunctionType type;
+            public string simpleType;
+            //public List<string> simpleInputs;
+            //public Dictionary<string, string> complexMapping;
+
+            public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string simTy)
+            {
+                known = false;
+                name = nm;
+                guid = id;
+                dependencies = deps;
+                type = ty;
+                simpleType = simTy;
+            }
+
+            public static Dictionary<string, string> simpleFunctionTransform = new Dictionary<string, string>
+            {
+                {"Addition", "add"},
+                {"Multiplication", "mult"},
+                {"AritmeticMean", "mean"},
+                {"GeometricMean", "gmean"},
+                {"Maximum", "max"},
+                {"Minimum", "min"}
+            };
+
+            //public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, )
+            //{
+            //    known = false;
+            //    name = nm;
+            //    guid = id;
+            //    dependencies = deps;
+            //    type = ty;
+            //}
+
+            //public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, )
+            //{
+            //    known = false;
+            //    name = nm;
+            //    guid = id;
+            //    dependencies = deps;
+            //    type = ty;
+            //}
+        }
+
+        void BuildLists(string parents, VF.Component component, List<string> components, List<AssignmentLine> assignmentLines, List<Function> functions)
+        {
+            components.Add(parents + component.Name);
+            parents = parents + component.Name + ".";
+            foreach (var p in component.Children.ParameterCollection) {
+                var incoming = p.SrcConnections.ValueFlowCollection.Count();
+                var outgoing = p.DstConnections.ValueFlowCollection.Count();
+                var incoming2 = p.AllDstConnections.Any();
+                var outgoing2 = p.AllSrcConnections.Any();
+                if (p.SrcConnections.ValueFlowCollection.First().SrcEnd.Name == p.Name) // No incoming ValueFlow connections
+                {
+                    // Value is Constant
+                    assignmentLines.Add(new AssignmentLine(parents + p.Name, p.Guid, p.Attributes.Value));
+                }
+                else foreach (var source in p.SrcConnections.ValueFlowCollection)
+                {
+                    if (source.DstEnd.Name == p.Name)
+                    {
+                        assignmentLines.Add(new AssignmentLine(parents + p.Name, p.Guid, source.SrcEnd.Guid));
+                    }
+                }
+            }
+
+            //foreach (var f in component.Children.SimpleFormulaCollection)
+            //{
+            //    var deps = new List<System.Guid>();
+
+            //    functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.SIMPLE, f.Attributes.Method.ToString()));
+            //}
+
+            //foreach (var f in component.Children.PythonCollection)
+            //{
+            //    functions.Add(new Function(parents + f.Name, f));
+            //}
+
+            foreach (VF.Component c in component.Children.ComponentCollection) {
+                BuildLists(parents, c, components, assignmentLines, functions);
+            }
+
+        }
+        
         /// <summary>
         /// The main entry point of the interpreter. A transaction is already open,
         /// GMEConsole is available. A general try-catch block catches all the exceptions
@@ -86,11 +208,113 @@ namespace ValueFlowInterpreter
             {
                 VF.Component dsCurrentObj = VFClasses.Component.Cast(currentobj);
 
-                Console.Out.Write(dsCurrentObj.Name);
+                // List of components for which we need dictionaries
+                var components = new List<string>();
+
+                // constants and function references list
+                var assignmentLines = new List<AssignmentLine>();
+
+                // functions
+                var functions = new List<Function>();
+
+                // Build the list of all constants and functions
+                BuildLists("", dsCurrentObj, components, assignmentLines, functions);
+
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"output.py"))
+                {
+                    file.WriteLine("import json");
+                    file.WriteLine("");
+                    file.WriteLine("parameters = dict()");
+                    file.WriteLine("");
+                    file.WriteLine("def add(x, *args):");
+                    file.WriteLine("  for arg in args:");
+                    file.WriteLine("    x = x + arg");
+                    file.WriteLine("  return x");
+                    file.WriteLine("");
+                    file.WriteLine("def mult(x, *args):");
+                    file.WriteLine("  for arg in args:");
+                    file.WriteLine("    x = x * arg");
+                    file.WriteLine("  return x");
+                    file.WriteLine("");
+                    file.WriteLine("def max (x, *args):");
+                    file.WriteLine("  for arg in args:");
+                    file.WriteLine("    if arg > x:");
+                    file.WriteLine("      x = arg");
+                    file.WriteLine("  return x");
+                    file.WriteLine("");
+
+                    foreach (var c in components)
+                    {
+                        file.WriteLine("parameters[\"" + c.Replace(".", "\"][\"") + "\"] = dict()");
+                    }
+
+                    var knownElements = new List<System.Guid>();
+                    var values = new Dictionary<System.Guid, string>();
+
+                    int lastCount = -1;
+                    int count = 0;
+                    while (count > lastCount)
+                    {
+                        lastCount = count;
+                        foreach (var l in assignmentLines)
+                        {
+                            if (l.known & !knownElements.Contains(l.guid))
+                            {
+                                knownElements.Add(l.guid);
+                                values.Add(l.guid, "parameters[\"" + l.name.Replace(".", "\"][\"") + "\"]");
+                                file.WriteLine("parameters[\"" + l.name.Replace(".", "\"][\"") + "\"] = " + l.value);
+                                count++;
+                            }
+                            else if (!knownElements.Contains(l.guid))
+                            {
+                                if (knownElements.Contains(l.dependencies.First()))
+                                {
+                                    knownElements.Add(l.guid);
+                                    values.Add(l.guid, values[l.dependencies.First()]);
+                                    file.WriteLine("parameters[\"" + l.name.Replace(".", "\"][\"") + "\"] = " + values[l.dependencies.First()]);
+                                    count++;
+                                }
+                            }
+                        }
+
+                        //foreach (var f in functions)
+                        //{
+                        //    if (f.type == Function.FunctionType.SIMPLE)
+                        //    {
+                        //        var allDepsSatisfied = true;
+                        //        foreach (var dep in f.dependencies)
+                        //        {
+                        //            if (!knownElements.Contains(dep))
+                        //            {
+                        //                allDepsSatisfied = false;
+                        //                break;
+                        //            }
+                        //        }
+                        //        if (allDepsSatisfied)
+                        //        {
+                        //            var valueString = Function.simpleFunctionTransform[f.simpleType] + "(";
+                        //            foreach (var dep in f.dependencies)
+                        //            {
+                        //                valueString = valueString + values[dep] + ",";
+                        //            }
+                        //            valueString = valueString.Remove(valueString.Length - 1, 1) + ")";
+                        //            f.value = valueString;
+                        //            knownElements.Add(f.guid);
+                        //            values.Add(f.guid, f.value);
+                        //            f.known = true;
+                        //            count++;
+                        //        }
+                        //    }
+                        //}
+                    }
+                    file.WriteLine("");
+                    file.WriteLine("print json.dumps(parameters, indent=2)");
+                }
             }
 
         }
 
+        
         #region IMgaComponentEx Members
 
         MgaGateway MgaGateway { get; set; }

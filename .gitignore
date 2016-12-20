@@ -1,0 +1,7 @@
+*.mta*
+*.mga
+*.xmp*
+AssemblySignature.snk
+ISIS.GME**
+*.py
+src/
