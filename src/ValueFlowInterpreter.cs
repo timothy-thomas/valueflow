@@ -154,12 +154,18 @@ namespace ValueFlowInterpreter
                 }
             }
 
-            //foreach (var f in component.Children.SimpleFormulaCollection)
-            //{
-            //    var deps = new List<System.Guid>();
-
-            //    functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.SIMPLE, f.Attributes.Method.ToString()));
-            //}
+            foreach (var f in component.Children.SimpleFormulaCollection)
+            {
+                var deps = new List<System.Guid>();
+                foreach (var source in f.SrcConnections.ValueFlowCollection)
+                {
+                    if (source.DstEnd.Name == f.Name)
+                    {
+                        deps.Add(source.SrcEnd.Guid);
+                    }
+                }
+                functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.SIMPLE, f.Attributes.Method.ToString()));
+            }
 
             //foreach (var f in component.Children.PythonCollection)
             //{
@@ -277,35 +283,28 @@ namespace ValueFlowInterpreter
                             }
                         }
 
-                        //foreach (var f in functions)
-                        //{
-                        //    if (f.type == Function.FunctionType.SIMPLE)
-                        //    {
-                        //        var allDepsSatisfied = true;
-                        //        foreach (var dep in f.dependencies)
-                        //        {
-                        //            if (!knownElements.Contains(dep))
-                        //            {
-                        //                allDepsSatisfied = false;
-                        //                break;
-                        //            }
-                        //        }
-                        //        if (allDepsSatisfied)
-                        //        {
-                        //            var valueString = Function.simpleFunctionTransform[f.simpleType] + "(";
-                        //            foreach (var dep in f.dependencies)
-                        //            {
-                        //                valueString = valueString + values[dep] + ",";
-                        //            }
-                        //            valueString = valueString.Remove(valueString.Length - 1, 1) + ")";
-                        //            f.value = valueString;
-                        //            knownElements.Add(f.guid);
-                        //            values.Add(f.guid, f.value);
-                        //            f.known = true;
-                        //            count++;
-                        //        }
-                        //    }
-                        //}
+                        foreach (var f in functions.Where(x => !knownElements.Contains(x.guid)))
+                        {
+                            if (f.type == Function.FunctionType.SIMPLE)
+                            {
+                                var allDepsSatisfied = true;
+                                foreach (var dep in f.dependencies)
+                                {
+                                    if (!knownElements.Contains(dep))
+                                    {
+                                        allDepsSatisfied = false;
+                                        break;
+                                    }
+                                }
+                                if (allDepsSatisfied)
+                                {
+                                    var valueString = Function.simpleFunctionTransform[f.simpleType] + "(" + String.Join(",",f.dependencies.Select(x => values[x]).ToList()) + ")";
+                                    knownElements.Add(f.guid);
+                                    values.Add(f.guid, valueString);
+                                    count++;
+                                }
+                            }
+                        }
                     }
                     file.WriteLine("");
                     file.WriteLine("print json.dumps(parameters, indent=2)");
