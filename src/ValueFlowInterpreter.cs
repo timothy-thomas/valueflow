@@ -80,7 +80,6 @@ namespace ValueFlowInterpreter
 
         class Function : ValueFlowElement
         {
-            public List<System.Guid> dependencies;
             public enum FunctionType
             {
                 SIMPLE = 0,
@@ -89,8 +88,8 @@ namespace ValueFlowInterpreter
             }
             public FunctionType type;
             public string simpleType;
-            //public List<string> simpleInputs;
-            //public Dictionary<string, string> complexMapping;
+            public Dictionary<System.Guid, string> complexMapping;
+            public string body;
 
             public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string simTy)
             {
@@ -112,14 +111,16 @@ namespace ValueFlowInterpreter
                 {"Minimum", "min"}
             };
 
-            //public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, )
-            //{
-            //    known = false;
-            //    name = nm;
-            //    guid = id;
-            //    dependencies = deps;
-            //    type = ty;
-            //}
+            public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, Dictionary<System.Guid, string> cm, String bd)
+            {
+                known = false;
+                name = nm;
+                guid = id;
+                dependencies = deps;
+                type = ty;
+                complexMapping = cm;
+                body = bd;
+            }
 
             //public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, )
             //{
@@ -157,14 +158,30 @@ namespace ValueFlowInterpreter
             foreach (var f in component.Children.SimpleFormulaCollection)
             {
                 var deps = new List<System.Guid>();
-                foreach (var source in f.SrcConnections.ValueFlowCollection)
+                foreach (var flow in f.SrcConnections.ValueFlowCollection)
                 {
-                    if (source.DstEnd.Name == f.Name)
+                    if (flow.DstEnd.Name == f.Name)
                     {
-                        deps.Add(source.SrcEnd.Guid);
+                        deps.Add(flow.SrcEnd.Guid);
                     }
                 }
                 functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.SIMPLE, f.Attributes.Method.ToString()));
+            }
+
+            foreach (var f in component.Children.ComplexFormulaCollection)
+            {
+                var body = f.Attributes.Expression.ToString();
+                var deps = new List<System.Guid>();
+                var table = new Dictionary<System.Guid, string>();
+                foreach (var flow in f.SrcConnections.ValueFlowCollection)
+                {
+                    if (flow.DstEnd.Name == f.Name)
+                    {
+                        deps.Add(flow.SrcEnd.Guid);
+                        table[flow.SrcEnd.Guid] = flow.Attributes.Name;
+                    }
+                }
+                functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.COMPLEX, table, body));
             }
 
             //foreach (var f in component.Children.PythonCollection)
@@ -262,7 +279,7 @@ namespace ValueFlowInterpreter
                     while (count > lastCount)
                     {
                         lastCount = count;
-                        foreach (var l in assignmentLines)
+                        foreach (var l in assignmentLines.Where(x => !knownElements.Contains(x.guid)))
                         {
                             if (l.known & !knownElements.Contains(l.guid))
                             {
@@ -304,10 +321,42 @@ namespace ValueFlowInterpreter
                                     count++;
                                 }
                             }
+                            else if (f.type == Function.FunctionType.COMPLEX)
+                            {
+                                var allDepsSatisfied = true;
+                                foreach (var dep in f.dependencies)
+                                {
+                                    if (!knownElements.Contains(dep))
+                                    {
+                                        allDepsSatisfied = false;
+                                        break;
+                                    }
+                                }
+                                if (allDepsSatisfied)
+                                {
+                                    var valueMapping = new Dictionary<string, string>();
+                                    foreach (var dep in f.dependencies)
+                                    {
+                                        valueMapping[f.complexMapping[dep]] = values[dep];
+                                    }
+                                    var output = new StringBuilder(f.body);
+                                    foreach (var kvp in valueMapping)
+                                        output.Replace(kvp.Key, kvp.Value);
+                                    var valueString = output.ToString();
+                                    // Only Allow unary operator to be assigned, i.e. not "5+7" or "5/7", but "(5+7)", "(5/7)", or "max(5,7)"
+                                    if (!System.Text.RegularExpressions.Regex.IsMatch(valueString, @"^[a-zA-Z]*\(.*\)$"))
+                                    {
+                                        valueString = "(" + valueString + ")";
+                                    }
+                                    knownElements.Add(f.guid);
+                                    values.Add(f.guid, valueString);
+                                    count++;
+                                }
+                            }
                         }
                     }
                     file.WriteLine("");
-                    file.WriteLine("print json.dumps(parameters, indent=2)");
+                    file.WriteLine("print json.dumps(parameters, indent=2, sort_keys=True)");
                 }
             }
 

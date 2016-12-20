@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project SYSTEM "mga.dtd">
 
-<project guid="{AF04C92C-C302-4301-B4A0-7AECF66B0302}" cdate="Mon Dec 19 16:12:19 2016" mdate="Mon Dec 19 16:12:19 2016" version="" metaguid="{847AA7EF-60B1-426D-9B4C-5B242A8EA55A}" metaversion="" metaname="ValueFlow">
+<project guid="{DF831197-2376-4EFA-AE9A-915EE0519E11}" cdate="Mon Dec 19 16:12:19 2016" mdate="Mon Dec 19 16:12:19 2016" version="" metaguid="{847AA7EF-60B1-426D-9B4C-5B242A8EA55A}" metaversion="" metaname="ValueFlow">
 	<name>RootFolder</name>
 	<comment></comment>
 	<author></author>
-	<folder id="id-006a-00000001" relid="0x1" childrelidcntr="0x4" kind="RootFolder" guid="{d3b2c389-3ae0-468c-87d0-dfc37471fca9}">
+	<folder id="id-006a-00000001" relid="0x1" childrelidcntr="0x5" kind="RootFolder" guid="{d3b2c389-3ae0-468c-87d0-dfc37471fca9}">
 		<name>RootFolder</name>
 		<regnode name="ConstraintManagerSettings" status="undefined">
 			<value></value>
@@ -1646,6 +1646,371 @@
 				</attribute>
 				<connpoint role="src" target="id-0066-0000004c"/>
 				<connpoint role="dst" target="id-0066-0000004d"/>
+			</connection>
+		</model>
+		<model id="id-0065-00000013" kind="Component" guid="{042fbe45-e4cb-413a-bb16-0971af9cb783}" relid="0x5" childrelidcntr="0x45">
+			<name>ComplexExample</name>
+			<model id="id-0065-00000016" kind="Component" role="Component" guid="{b22cd5aa-c923-4ecf-b286-570ea6a224a8}" relid="0x19" childrelidcntr="0x5">
+				<name>ComplexContainer</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>602,322</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<atom id="id-0066-0000008e" kind="Parameter" role="Parameter" guid="{b3d131b1-32a7-4ac6-b350-89bc7db74872}" relid="0x4">
+					<name>Length</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>63,175</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Value" status="meta">
+						<value></value>
+					</attribute>
+				</atom>
+				<atom id="id-0066-0000008f" kind="Parameter" role="Parameter" guid="{dd0d17e7-0260-4df0-a5f1-ae92234fb4d3}" relid="0x2">
+					<name>Height</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>63,329</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Value" status="meta">
+						<value></value>
+					</attribute>
+				</atom>
+				<atom id="id-0066-00000090" kind="Parameter" role="Parameter" guid="{d008b954-96aa-4368-98ef-79f9da2dfdd4}" relid="0x5">
+					<name>Volume</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>63,469</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Value" status="meta">
+						<value></value>
+					</attribute>
+				</atom>
+				<atom id="id-0066-00000091" kind="Parameter" role="Parameter" guid="{a4105be3-3a90-414f-b78a-eeba870a18e9}" relid="0x3">
+					<name>Width</name>
+					<regnode name="PartRegs" status="undefined">
+						<value></value>
+						<regnode name="Main" status="undefined">
+							<value></value>
+							<regnode name="Position" isopaque="yes">
+								<value>63,252</value>
+							</regnode>
+						</regnode>
+					</regnode>
+					<attribute kind="Value" status="meta">
+						<value></value>
+					</attribute>
+				</atom>
+			</model>
+			<atom id="id-0066-00000072" kind="ComplexFormula" role="ComplexFormula" guid="{9d2af0d9-056b-4b89-a256-494ddcbcd6ad}" relid="0x38">
+				<name>Mult</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>462,427</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Expression">
+					<value>W*L*H</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-00000074" kind="ComplexFormula" role="ComplexFormula" guid="{2d5aee61-7778-4349-9512-aeba31ef3e2f}" relid="0x24">
+				<name>Add</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>322,392</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>wE</value>
+				</regnode>
+				<attribute kind="Expression">
+					<value>H1+H2</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-00000075" kind="ComplexFormula" role="ComplexFormula" guid="{27588d82-a195-4417-8943-da95f57e951e}" relid="0x23">
+				<name>Max</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>322,336</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>wE</value>
+				</regnode>
+				<attribute kind="Expression">
+					<value>max(W1,W2)</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-00000076" kind="ComplexFormula" role="ComplexFormula" guid="{f9fc55c3-f49c-4e6f-b900-7e40dd5cb99c}" relid="0x22">
+				<name>Max</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>322,280</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>wE</value>
+				</regnode>
+				<attribute kind="Expression">
+					<value>max(L1,L2)</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-00000079" kind="Parameter" role="Parameter" guid="{4f5adfe8-6b07-4c57-856c-12f3681846cd}" relid="0xd">
+				<name>Box2Height</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>28,392</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>E</value>
+				</regnode>
+				<attribute kind="Value">
+					<value>20</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007a" kind="Parameter" role="Parameter" guid="{8009e711-7012-4a61-9052-0e07f3fdd29e}" relid="0xc">
+				<name>Box1Length</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>28,70</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>E</value>
+				</regnode>
+				<attribute kind="Value">
+					<value>10</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007b" kind="Parameter" role="Parameter" guid="{d3bbb069-67d6-45a5-8a51-9260b30862ac}" relid="0xb">
+				<name>Box2Length</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>28,280</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>E</value>
+				</regnode>
+				<attribute kind="Value">
+					<value>10</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007c" kind="Parameter" role="Parameter" guid="{e3e1de58-edde-4f81-8bdf-6330b10a4c2c}" relid="0xa">
+				<name>Box1Height</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>28,182</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>E</value>
+				</regnode>
+				<attribute kind="Value">
+					<value>8</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007e" kind="Parameter" role="Parameter" guid="{99dc5021-3f34-42c4-b9bc-e06eeffc674d}" relid="0x3">
+				<name>Box2Width</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>28,336</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>E</value>
+				</regnode>
+				<attribute kind="Value">
+					<value>7</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007f" kind="Parameter" role="Parameter" guid="{9e93c26d-a3c8-423c-a4d9-7fd16675140a}" relid="0x2">
+				<name>Box1Width</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>28,126</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>E</value>
+				</regnode>
+				<attribute kind="Value">
+					<value>13</value>
+				</attribute>
+			</atom>
+			<connection id="id-0068-00000067" kind="ValueFlow" role="ValueFlow" guid="{8f29f8a6-cc63-4371-be29-31902df04651}" relid="0x43">
+				<name>ValueFlow</name>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>E</value>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="src" target="id-0066-00000072"/>
+				<connpoint role="dst" target="id-0066-00000090"/>
+			</connection>
+			<connection id="id-0068-0000006c" kind="ValueFlow" role="ValueFlow" guid="{efe0095b-5740-45d1-9a6e-833adb641fcf}" relid="0x3e">
+				<name>ValueFlow</name>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>Ew</value>
+				</regnode>
+				<attribute kind="Name">
+					<value>L</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000072"/>
+				<connpoint role="src" target="id-0066-00000076"/>
+			</connection>
+			<connection id="id-0068-0000006d" kind="ValueFlow" role="ValueFlow" guid="{8056e99b-5e2b-4a7a-83b2-a7fa0380e4dc}" relid="0x3d">
+				<name>ValueFlow</name>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>Ew</value>
+				</regnode>
+				<attribute kind="Name">
+					<value>W</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000072"/>
+				<connpoint role="src" target="id-0066-00000075"/>
+			</connection>
+			<connection id="id-0068-0000006e" kind="ValueFlow" role="ValueFlow" guid="{f5413f4b-fa33-4423-8a05-1dbf0675aebb}" relid="0x3c">
+				<name>ValueFlow</name>
+				<attribute kind="Name">
+					<value>H</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000072"/>
+				<connpoint role="src" target="id-0066-00000074"/>
+			</connection>
+			<connection id="id-0068-00000075" kind="ValueFlow" role="ValueFlow" guid="{dcdf372d-7aff-46db-889a-a6dea61c1d4e}" relid="0x2d">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="src" target="id-0066-00000074"/>
+				<connpoint role="dst" target="id-0066-0000008f"/>
+			</connection>
+			<connection id="id-0068-00000076" kind="ValueFlow" role="ValueFlow" guid="{16f03285-0ac2-4de5-8c1d-f0730d1a14e6}" relid="0x2c">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="src" target="id-0066-00000075"/>
+				<connpoint role="dst" target="id-0066-00000091"/>
+			</connection>
+			<connection id="id-0068-00000077" kind="ValueFlow" role="ValueFlow" guid="{4ace7816-2ac4-4805-a115-60252495acbc}" relid="0x2b">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="src" target="id-0066-00000076"/>
+				<connpoint role="dst" target="id-0066-0000008e"/>
+			</connection>
+			<connection id="id-0068-00000078" kind="ValueFlow" role="ValueFlow" guid="{cc17d917-54f4-4a3a-bea3-784ccbcddd47}" relid="0x2a">
+				<name>ValueFlow</name>
+				<attribute kind="Name">
+					<value>H2</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000074"/>
+				<connpoint role="src" target="id-0066-00000079"/>
+			</connection>
+			<connection id="id-0068-00000079" kind="ValueFlow" role="ValueFlow" guid="{97d2418d-80a1-4eff-a2bb-5a0a08cded06}" relid="0x29">
+				<name>ValueFlow</name>
+				<attribute kind="Name">
+					<value>H1</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000074"/>
+				<connpoint role="src" target="id-0066-0000007c"/>
+			</connection>
+			<connection id="id-0068-0000007a" kind="ValueFlow" role="ValueFlow" guid="{35e4ca3e-c614-4c87-8652-140f5a067242}" relid="0x28">
+				<name>ValueFlow</name>
+				<attribute kind="Name">
+					<value>W2</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000075"/>
+				<connpoint role="src" target="id-0066-0000007e"/>
+			</connection>
+			<connection id="id-0068-0000007b" kind="ValueFlow" role="ValueFlow" guid="{bdc7dc0c-7787-4a96-9257-048795a87b33}" relid="0x27">
+				<name>ValueFlow</name>
+				<attribute kind="Name">
+					<value>W1</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000075"/>
+				<connpoint role="src" target="id-0066-0000007f"/>
+			</connection>
+			<connection id="id-0068-0000007c" kind="ValueFlow" role="ValueFlow" guid="{bb55e2ae-17ca-473c-8532-ec8381aa60af}" relid="0x26">
+				<name>ValueFlow</name>
+				<attribute kind="Name">
+					<value>L2</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000076"/>
+				<connpoint role="src" target="id-0066-0000007b"/>
+			</connection>
+			<connection id="id-0068-0000007d" kind="ValueFlow" role="ValueFlow" guid="{9ed7cfca-4932-476d-83a7-458f566e60c5}" relid="0x25">
+				<name>ValueFlow</name>
+				<attribute kind="Name">
+					<value>L1</value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000076"/>
+				<connpoint role="src" target="id-0066-0000007a"/>
 			</connection>
 		</model>
 	</folder>
