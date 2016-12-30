@@ -5,4 +5,5 @@ AssemblySignature.snk
 ISIS.GME**
 *.py
 *.pyc
-src/
+src/obj/
+src/bin/
