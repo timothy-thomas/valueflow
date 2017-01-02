@@ -141,17 +141,15 @@ namespace ValueFlowInterpreter
                 var outgoing = p.DstConnections.ValueFlowCollection.Count();
                 var incoming2 = p.AllDstConnections.Any();
                 var outgoing2 = p.AllSrcConnections.Any();
-                if (p.SrcConnections.ValueFlowCollection.First().SrcEnd.Name == p.Name) // No incoming ValueFlow connections
+                if (!p.SrcConnections.ValueFlowCollection.Any()) // No incoming ValueFlow connections
                 {
                     // Value is Constant
                     assignmentLines.Add(new AssignmentLine(parents + p.Name, p.Guid, p.Attributes.Value));
                 }
-                else foreach (var source in p.SrcConnections.ValueFlowCollection)
+                else
                 {
-                    if (source.DstEnd.Name == p.Name)
-                    {
-                        assignmentLines.Add(new AssignmentLine(parents + p.Name, p.Guid, source.SrcEnd.Guid));
-                    }
+                    var dep = p.SrcConnections.ValueFlowCollection.First().SrcEnd.Guid;
+                    assignmentLines.Add(new AssignmentLine(parents + p.Name, p.Guid, dep));
                 }
             }
 
@@ -160,10 +158,7 @@ namespace ValueFlowInterpreter
                 var deps = new List<System.Guid>();
                 foreach (var flow in f.SrcConnections.ValueFlowCollection)
                 {
-                    if (flow.DstEnd.Name == f.Name)
-                    {
-                        deps.Add(flow.SrcEnd.Guid);
-                    }
+                    deps.Add(flow.SrcEnd.Guid);
                 }
                 functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.SIMPLE, f.Attributes.Method.ToString()));
             }
@@ -175,11 +170,8 @@ namespace ValueFlowInterpreter
                 var table = new Dictionary<System.Guid, string>();
                 foreach (var flow in f.SrcConnections.ValueFlowCollection)
                 {
-                    if (flow.DstEnd.Name == f.Name)
-                    {
-                        deps.Add(flow.SrcEnd.Guid);
-                        table[flow.SrcEnd.Guid] = flow.Attributes.Name;
-                    }
+                    deps.Add(flow.SrcEnd.Guid);
+                    table[flow.SrcEnd.Guid] = flow.Attributes.Name;
                 }
                 functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.COMPLEX, table, body));
             }

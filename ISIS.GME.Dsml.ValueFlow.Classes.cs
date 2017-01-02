@@ -16,9 +16,9 @@ namespace ISIS.GME.Dsml.ValueFlow.Classes
 	/// <summary>
 	///<para>This API code is compatible with the following paradigm:</para>
 	///<para> - Name: ValueFlow</para>
-	///<para> - Guid: {847AA7EF-60B1-426D-9B4C-5B242A8EA55A}</para>
+	///<para> - Guid: {EBB4FD9F-E2EC-45AD-9C25-408EF95CF6FA}</para>
 	///<para>Additional information: </para>
-	///<para> - Date: 12/19/16 4:56:44 PM</para>
+	///<para> - Date: 1/2/17 3:30:20 PM</para>
 	///<para> - Author: </para>
 	///<para> - Version: </para>
 	///<para> - Comment: </para>
@@ -45,6 +45,7 @@ namespace ISIS.GME.Dsml.ValueFlow.Classes
 {1020, typeof(Output) },
 {1001, typeof(Parameter) },
 {1021, typeof(SimpleFormula) },
+{1038, typeof(ValueFlowElement) },
 {1022, typeof(ValueFlow) },
 {1002, typeof(Component) },
 {1031, typeof(Python) }
@@ -147,7 +148,7 @@ if ((Impl as global::GME.MGA.MgaFolder).ParentFolder != null) { return ISIS.GME.
 			{
 				get
 				{
-					return new global::System.Guid("{847AA7EF-60B1-426D-9B4C-5B242A8EA55A}");
+					return new global::System.Guid("{EBB4FD9F-E2EC-45AD-9C25-408EF95CF6FA}");
 				}
 			}
 			
@@ -228,7 +229,7 @@ return result;
 	
 	/// <summary>
 	/// </summary>
-	public class NamedElement : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement
+	public class NamedElement : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
 	{
 		
 		/// <summary>
@@ -236,6 +237,18 @@ return result;
 		///<para> NULL if the object is not derived.</para>
 		///</summary>
 		ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement.ArcheType
+		{
+			get
+			{
+				return (Impl as global::GME.MGA.MgaFCO).ArcheType == null ? null : ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.NamedElement>((Impl as global::GME.MGA.MgaFCO).ArcheType as global::GME.MGA.MgaObject);
+			}
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ArcheType
 		{
 			get
 			{
@@ -261,6 +274,14 @@ return result;
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.SrcConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass(Impl);
+			}
+		}
+		
 		/// 
 		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
 		{
@@ -276,6 +297,14 @@ return result;
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.DstConnectionsClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.DstConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass(Impl);
 			}
 		}
 		
@@ -312,6 +341,18 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 			}
 		}
 		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.Attributes
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass(this.Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
 		{
@@ -331,6 +372,14 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ReferencedBy
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass(Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
 		{
@@ -347,6 +396,14 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.MembersOfSetClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.MembersOfSet
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass(Impl);
 			}
 		}
 		
@@ -384,7 +441,7 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -415,7 +472,7 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -480,7 +537,7 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 	
 	/// <summary>
 	/// </summary>
-	public class FormulaAtom : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom
+	public class FormulaAtom : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
 	{
 		
 		/// <summary>
@@ -488,6 +545,18 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 		///<para> NULL if the object is not derived.</para>
 		///</summary>
 		ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom.ArcheType
+		{
+			get
+			{
+				return (Impl as global::GME.MGA.MgaFCO).ArcheType == null ? null : ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom>((Impl as global::GME.MGA.MgaFCO).ArcheType as global::GME.MGA.MgaObject);
+			}
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ArcheType
 		{
 			get
 			{
@@ -513,6 +582,14 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.SrcConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass(Impl);
+			}
+		}
+		
 		/// 
 		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
 		{
@@ -528,6 +605,14 @@ global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).Pa
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom.DstConnectionsClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.DstConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass(Impl);
 			}
 		}
 		
@@ -568,6 +653,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.Attributes
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass(this.Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
 		{
@@ -587,6 +684,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ReferencedBy
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass(Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
 		{
@@ -603,6 +708,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom.MembersOfSetClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.MembersOfSet
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass(Impl);
 			}
 		}
 		
@@ -640,7 +753,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -671,7 +784,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -736,7 +849,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 	
 	/// <summary>
 	/// </summary>
-	public class Output : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.Output, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement
+	public class Output : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.Output, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
 	{
 		
 		/// <summary>
@@ -756,6 +869,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 		///<para> NULL if the object is not derived.</para>
 		///</summary>
 		ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement.ArcheType
+		{
+			get
+			{
+				return (Impl as global::GME.MGA.MgaFCO).ArcheType == null ? null : ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.Output>((Impl as global::GME.MGA.MgaFCO).ArcheType as global::GME.MGA.MgaObject);
+			}
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ArcheType
 		{
 			get
 			{
@@ -789,6 +914,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.SrcConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass(Impl);
+			}
+		}
+		
 		/// 
 		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
 		{
@@ -812,6 +945,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.DstConnectionsClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.DstConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass(Impl);
 			}
 		}
 		
@@ -864,6 +1005,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			}
 		}
 		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.Attributes
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass(this.Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
 		{
@@ -891,6 +1044,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ReferencedBy
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass(Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
 		{
@@ -915,6 +1076,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.MembersOfSetClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.MembersOfSet
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass(Impl);
 			}
 		}
 		
@@ -986,7 +1155,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -1017,7 +1186,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -1082,7 +1251,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 	
 	/// <summary>
 	/// </summary>
-	public class Input : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.Input, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement
+	public class Input : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.Input, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
 	{
 		
 		/// <summary>
@@ -1102,6 +1271,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 		///<para> NULL if the object is not derived.</para>
 		///</summary>
 		ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement.ArcheType
+		{
+			get
+			{
+				return (Impl as global::GME.MGA.MgaFCO).ArcheType == null ? null : ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.Input>((Impl as global::GME.MGA.MgaFCO).ArcheType as global::GME.MGA.MgaObject);
+			}
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ArcheType
 		{
 			get
 			{
@@ -1135,6 +1316,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.SrcConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass(Impl);
+			}
+		}
+		
 		/// 
 		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
 		{
@@ -1158,6 +1347,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.DstConnectionsClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.DstConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass(Impl);
 			}
 		}
 		
@@ -1210,6 +1407,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			}
 		}
 		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.Attributes
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass(this.Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
 		{
@@ -1237,6 +1446,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ReferencedBy
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass(Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
 		{
@@ -1261,6 +1478,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.MembersOfSetClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.MembersOfSet
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass(Impl);
 			}
 		}
 		
@@ -1332,7 +1557,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -1363,7 +1588,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1031/*"Python"*/) { r
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -1535,8 +1760,8 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			get
 			{
 				global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Base> result = ISIS.GME.Common.Utils.CastMgaChildren(Impl.ChildObjects, new global::System.Collections.Generic.Dictionary<int, global::System.Type>() { 
-{ 1020 /*Output*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.Output ) },
 { 1019 /*Input*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.Input ) },
+{ 1020 /*Output*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.Output ) },
 });
 ;
 				return result;
@@ -1734,11 +1959,11 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			///</para>
 			///</summary>
 			///
-			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Output> OutputCollection
+			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Input> InputCollection
 			{
 				get
 				{
-global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Output> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Output, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Output" /* 1020 */);
+global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Input> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Input" /* 1019 */);
 return result;
 				}
 			}
@@ -1749,11 +1974,11 @@ return result;
 			///</para>
 			///</summary>
 			///
-			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Input> InputCollection
+			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Output> OutputCollection
 			{
 				get
 				{
-global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Input> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Input" /* 1019 */);
+global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Output> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Output, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Output" /* 1020 */);
 return result;
 				}
 			}
@@ -1800,7 +2025,7 @@ return result;
 	
 	/// <summary>
 	/// </summary>
-	public class ComplexFormula : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.ComplexFormula, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom
+	public class ComplexFormula : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.ComplexFormula, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
 	{
 		
 		/// <summary>
@@ -1820,6 +2045,18 @@ return result;
 		///<para> NULL if the object is not derived.</para>
 		///</summary>
 		ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom.ArcheType
+		{
+			get
+			{
+				return (Impl as global::GME.MGA.MgaFCO).ArcheType == null ? null : ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula>((Impl as global::GME.MGA.MgaFCO).ArcheType as global::GME.MGA.MgaObject);
+			}
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ArcheType
 		{
 			get
 			{
@@ -1853,6 +2090,14 @@ return result;
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.SrcConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass(Impl);
+			}
+		}
+		
 		/// 
 		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
 		{
@@ -1876,6 +2121,14 @@ return result;
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom.DstConnectionsClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.DstConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass(Impl);
 			}
 		}
 		
@@ -1928,6 +2181,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.Attributes
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass(this.Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
 		{
@@ -1955,6 +2220,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ReferencedBy
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass(Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
 		{
@@ -1979,6 +2252,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom.MembersOfSetClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.MembersOfSet
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass(Impl);
 			}
 		}
 		
@@ -2050,7 +2331,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -2081,7 +2362,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -2161,7 +2442,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 	
 	/// <summary>
 	/// </summary>
-	public class SimpleFormula : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.SimpleFormula, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom
+	public class SimpleFormula : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.SimpleFormula, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
 	{
 		
 		/// <summary>
@@ -2181,6 +2462,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 		///<para> NULL if the object is not derived.</para>
 		///</summary>
 		ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom.ArcheType
+		{
+			get
+			{
+				return (Impl as global::GME.MGA.MgaFCO).ArcheType == null ? null : ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula>((Impl as global::GME.MGA.MgaFCO).ArcheType as global::GME.MGA.MgaObject);
+			}
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ArcheType
 		{
 			get
 			{
@@ -2214,6 +2507,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.SrcConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass(Impl);
+			}
+		}
+		
 		/// 
 		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
 		{
@@ -2237,6 +2538,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom.DstConnectionsClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.DstConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass(Impl);
 			}
 		}
 		
@@ -2289,6 +2598,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.Attributes
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass(this.Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
 		{
@@ -2316,6 +2637,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ReferencedBy
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass(Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
 		{
@@ -2340,6 +2669,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom.MembersOfSetClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.MembersOfSet
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass(Impl);
 			}
 		}
 		
@@ -2411,7 +2748,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -2442,7 +2779,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -2616,20 +2953,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 		{
 			get
 			{
-				return (new ISIS.GME.Common.Interfaces.FCO[] { ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.FormulaAtom, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.ComplexFormula, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.SimpleFormula, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.NamedElement, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Output, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Parameter, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Input, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.NamedElement, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Output, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Parameter, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Input, 
+				return (new ISIS.GME.Common.Interfaces.FCO[] { ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.ValueFlowElement, 
 ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.FormulaAtom, 
 ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.ComplexFormula, 
 ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.SimpleFormula, 
+((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.NamedElement, 
+((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Output, 
+((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Input, 
+((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).SrcEnds.Parameter, 
 }).FirstOrDefault(x => x != null);
 			}
 		}
@@ -2647,20 +2978,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 		{
 			get
 			{
-				return (new ISIS.GME.Common.Interfaces.FCO[] { ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.NamedElement, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.Output, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.Parameter, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.Input, 
+				return (new ISIS.GME.Common.Interfaces.FCO[] { ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.ValueFlowElement, 
+((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.FormulaAtom, 
+((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.ComplexFormula, 
+((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.SimpleFormula, 
 ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.NamedElement, 
 ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.Output, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.Parameter, 
 ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.Input, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.FormulaAtom, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.ComplexFormula, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.SimpleFormula, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.FormulaAtom, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.ComplexFormula, 
-((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.SimpleFormula, 
+((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow)(this)).DstEnds.Parameter, 
 }).FirstOrDefault(x => x != null);
 			}
 		}
@@ -2758,6 +3083,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 		///<para>- Output</para>
 		///<para>- Parameter</para>
 		///<para>- SimpleFormula</para>
+		///<para>- ValueFlowElement</para>
 		///</param>
 		///<param name="dst">
 		///<para>Destination of the connection, which could be:</para>
@@ -2766,6 +3092,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 		///<para>- Output</para>
 		///<para>- Parameter</para>
 		///<para>- SimpleFormula</para>
+		///<para>- ValueFlowElement</para>
 		///</param>
 		///<param name="srcRef">
 		///<para>Source reference parent.</para>
@@ -2782,124 +3109,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 		///</param>
 		///<returns>The connection object, which has been created.</returns>
 		///
-		public static ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow Connect(ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom src, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement dst, ISIS.GME.Common.Interfaces.Reference srcRef = null, ISIS.GME.Common.Interfaces.Reference dstRef = null, ISIS.GME.Dsml.ValueFlow.Interfaces.Component parent = null, DefaultRole role = DefaultRole.ValueFlow)
-		{
-			return ISIS.GME.Common.Utils.MakeConnection<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow>(src, dst, srcRef, dstRef, parent, "" + role.ToString());
-		}
-		
-		/// <summary>
-		///Creates a new ValueFlow connection.
-		///</summary>
-		///<param name="src">
-		///<para>Source of the connection, which could be:</para>
-		///<para>- ComplexFormula</para>
-		///<para>- Input</para>
-		///<para>- Output</para>
-		///<para>- Parameter</para>
-		///<para>- SimpleFormula</para>
-		///</param>
-		///<param name="dst">
-		///<para>Destination of the connection, which could be:</para>
-		///<para>- ComplexFormula</para>
-		///<para>- Input</para>
-		///<para>- Output</para>
-		///<para>- Parameter</para>
-		///<para>- SimpleFormula</para>
-		///</param>
-		///<param name="srcRef">
-		///<para>Source reference parent.</para>
-		///</param>
-		///<param name="dstRef">
-		///<para>Destination reference parent.</para>
-		///</param>
-		///<param name="parent">
-		///<para>Parent of the connection, which could be:</para>
-		///<para>- Component</para>
-		///</param>
-		///<param name="role">
-		///<para>Role of the connection</para>
-		///</param>
-		///<returns>The connection object, which has been created.</returns>
-		///
-		public static ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow Connect(ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom src, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom dst, ISIS.GME.Common.Interfaces.Reference srcRef = null, ISIS.GME.Common.Interfaces.Reference dstRef = null, ISIS.GME.Dsml.ValueFlow.Interfaces.Component parent = null, DefaultRole role = DefaultRole.ValueFlow)
-		{
-			return ISIS.GME.Common.Utils.MakeConnection<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow>(src, dst, srcRef, dstRef, parent, "" + role.ToString());
-		}
-		
-		/// <summary>
-		///Creates a new ValueFlow connection.
-		///</summary>
-		///<param name="src">
-		///<para>Source of the connection, which could be:</para>
-		///<para>- ComplexFormula</para>
-		///<para>- Input</para>
-		///<para>- Output</para>
-		///<para>- Parameter</para>
-		///<para>- SimpleFormula</para>
-		///</param>
-		///<param name="dst">
-		///<para>Destination of the connection, which could be:</para>
-		///<para>- ComplexFormula</para>
-		///<para>- Input</para>
-		///<para>- Output</para>
-		///<para>- Parameter</para>
-		///<para>- SimpleFormula</para>
-		///</param>
-		///<param name="srcRef">
-		///<para>Source reference parent.</para>
-		///</param>
-		///<param name="dstRef">
-		///<para>Destination reference parent.</para>
-		///</param>
-		///<param name="parent">
-		///<para>Parent of the connection, which could be:</para>
-		///<para>- Component</para>
-		///</param>
-		///<param name="role">
-		///<para>Role of the connection</para>
-		///</param>
-		///<returns>The connection object, which has been created.</returns>
-		///
-		public static ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow Connect(ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement src, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement dst, ISIS.GME.Common.Interfaces.Reference srcRef = null, ISIS.GME.Common.Interfaces.Reference dstRef = null, ISIS.GME.Dsml.ValueFlow.Interfaces.Component parent = null, DefaultRole role = DefaultRole.ValueFlow)
-		{
-			return ISIS.GME.Common.Utils.MakeConnection<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow>(src, dst, srcRef, dstRef, parent, "" + role.ToString());
-		}
-		
-		/// <summary>
-		///Creates a new ValueFlow connection.
-		///</summary>
-		///<param name="src">
-		///<para>Source of the connection, which could be:</para>
-		///<para>- ComplexFormula</para>
-		///<para>- Input</para>
-		///<para>- Output</para>
-		///<para>- Parameter</para>
-		///<para>- SimpleFormula</para>
-		///</param>
-		///<param name="dst">
-		///<para>Destination of the connection, which could be:</para>
-		///<para>- ComplexFormula</para>
-		///<para>- Input</para>
-		///<para>- Output</para>
-		///<para>- Parameter</para>
-		///<para>- SimpleFormula</para>
-		///</param>
-		///<param name="srcRef">
-		///<para>Source reference parent.</para>
-		///</param>
-		///<param name="dstRef">
-		///<para>Destination reference parent.</para>
-		///</param>
-		///<param name="parent">
-		///<para>Parent of the connection, which could be:</para>
-		///<para>- Component</para>
-		///</param>
-		///<param name="role">
-		///<para>Role of the connection</para>
-		///</param>
-		///<returns>The connection object, which has been created.</returns>
-		///
-		public static ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow Connect(ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement src, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom dst, ISIS.GME.Common.Interfaces.Reference srcRef = null, ISIS.GME.Common.Interfaces.Reference dstRef = null, ISIS.GME.Dsml.ValueFlow.Interfaces.Component parent = null, DefaultRole role = DefaultRole.ValueFlow)
+		public static ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow Connect(ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement src, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement dst, ISIS.GME.Common.Interfaces.Reference srcRef = null, ISIS.GME.Common.Interfaces.Reference dstRef = null, ISIS.GME.Dsml.ValueFlow.Interfaces.Component parent = null, DefaultRole role = DefaultRole.ValueFlow)
 		{
 			return ISIS.GME.Common.Utils.MakeConnection<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow>(src, dst, srcRef, dstRef, parent, "" + role.ToString());
 		}
@@ -3005,6 +3215,65 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			///Type could be:
 			///</para>
 			///<para>
+			///- ValueFlowElement
+			///</para>
+			///<para>
+			///- FormulaAtom
+			///</para>
+			///<para>
+			///- ComplexFormula
+			///</para>
+			///<para>
+			///- SimpleFormula
+			///</para>
+			///<para>
+			///- NamedElement
+			///</para>
+			///<para>
+			///- Output
+			///</para>
+			///<para>
+			///- Input
+			///</para>
+			///<para>
+			///- Parameter
+			///</para>
+			///
+			/// </summary>
+			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ValueFlowElement
+			{
+				get
+				{
+ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement result = null;
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlowElement");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "FormulaAtom");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ComplexFormula");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "SimpleFormula");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.NamedElement, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "NamedElement");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Output, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Output");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Input");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
+					if (result != null) { return result; };
+					return result;
+				}
+			}
+			
+			/// <summary>
+			/// Src ends. NOTE: Does not contain derived classes. Type must exactly match otherwise it is null.
+			/// <para>
+			///-----------------------------------------
+			///</para>
+			///<para>
+			///Type could be:
+			///</para>
+			///<para>
 			///- FormulaAtom
 			///</para>
 			///<para>
@@ -3093,10 +3362,10 @@ result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Simple
 			///- Output
 			///</para>
 			///<para>
-			///- Parameter
+			///- Input
 			///</para>
 			///<para>
-			///- Input
+			///- Parameter
 			///</para>
 			///
 			/// </summary>
@@ -3109,9 +3378,9 @@ result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.NamedE
 					if (result != null) { return result; };
 result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Output, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Output");
 					if (result != null) { return result; };
-result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
-					if (result != null) { return result; };
 result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Input");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
 					if (result != null) { return result; };
 					return result;
 				}
@@ -3150,16 +3419,16 @@ result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Output
 			///Type could be:
 			///</para>
 			///<para>
-			///- Parameter
+			///- Input
 			///</para>
 			///
 			/// </summary>
-			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter Parameter
+			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Input Input
 			{
 				get
 				{
-ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter result = null;
-result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
+ISIS.GME.Dsml.ValueFlow.Interfaces.Input result = null;
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Input");
 					if (result != null) { return result; };
 					return result;
 				}
@@ -3174,16 +3443,16 @@ result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parame
 			///Type could be:
 			///</para>
 			///<para>
-			///- Input
+			///- Parameter
 			///</para>
 			///
 			/// </summary>
-			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Input Input
+			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter Parameter
 			{
 				get
 				{
-ISIS.GME.Dsml.ValueFlow.Interfaces.Input result = null;
-result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Input");
+ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter result = null;
+result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
 					if (result != null) { return result; };
 					return result;
 				}
@@ -3217,103 +3486,51 @@ result = ISIS.GME.Common.Utils.CastSrcEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input,
 			///Type could be:
 			///</para>
 			///<para>
+			///- ValueFlowElement
+			///</para>
+			///<para>
+			///- FormulaAtom
+			///</para>
+			///<para>
+			///- ComplexFormula
+			///</para>
+			///<para>
+			///- SimpleFormula
+			///</para>
+			///<para>
 			///- NamedElement
 			///</para>
 			///<para>
 			///- Output
 			///</para>
 			///<para>
-			///- Parameter
+			///- Input
 			///</para>
 			///<para>
-			///- Input
+			///- Parameter
 			///</para>
 			///
 			/// </summary>
-			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement NamedElement
+			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ValueFlowElement
 			{
 				get
 				{
-ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement result = null;
+ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement result = null;
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlowElement");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.FormulaAtom, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "FormulaAtom");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ComplexFormula");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "SimpleFormula");
+					if (result != null) { return result; };
 result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.NamedElement, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "NamedElement");
 					if (result != null) { return result; };
 result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Output, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Output");
 					if (result != null) { return result; };
-result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
-					if (result != null) { return result; };
 result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Input");
 					if (result != null) { return result; };
-					return result;
-				}
-			}
-			
-			/// <summary>
-			/// Dst ends. NOTE: Does not contain derived classes. Type must exactly match otherwise it is null.
-			/// <para>
-			///-----------------------------------------
-			///</para>
-			///<para>
-			///Type could be:
-			///</para>
-			///<para>
-			///- Output
-			///</para>
-			///
-			/// </summary>
-			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Output Output
-			{
-				get
-				{
-ISIS.GME.Dsml.ValueFlow.Interfaces.Output result = null;
-result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Output, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Output");
-					if (result != null) { return result; };
-					return result;
-				}
-			}
-			
-			/// <summary>
-			/// Dst ends. NOTE: Does not contain derived classes. Type must exactly match otherwise it is null.
-			/// <para>
-			///-----------------------------------------
-			///</para>
-			///<para>
-			///Type could be:
-			///</para>
-			///<para>
-			///- Parameter
-			///</para>
-			///
-			/// </summary>
-			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter Parameter
-			{
-				get
-				{
-ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter result = null;
 result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
-					if (result != null) { return result; };
-					return result;
-				}
-			}
-			
-			/// <summary>
-			/// Dst ends. NOTE: Does not contain derived classes. Type must exactly match otherwise it is null.
-			/// <para>
-			///-----------------------------------------
-			///</para>
-			///<para>
-			///Type could be:
-			///</para>
-			///<para>
-			///- Input
-			///</para>
-			///
-			/// </summary>
-			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Input Input
-			{
-				get
-				{
-ISIS.GME.Dsml.ValueFlow.Interfaces.Input result = null;
-result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Input");
 					if (result != null) { return result; };
 					return result;
 				}
@@ -3396,6 +3613,117 @@ result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Comple
 				{
 ISIS.GME.Dsml.ValueFlow.Interfaces.SimpleFormula result = null;
 result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "SimpleFormula");
+					if (result != null) { return result; };
+					return result;
+				}
+			}
+			
+			/// <summary>
+			/// Dst ends. NOTE: Does not contain derived classes. Type must exactly match otherwise it is null.
+			/// <para>
+			///-----------------------------------------
+			///</para>
+			///<para>
+			///Type could be:
+			///</para>
+			///<para>
+			///- NamedElement
+			///</para>
+			///<para>
+			///- Output
+			///</para>
+			///<para>
+			///- Input
+			///</para>
+			///<para>
+			///- Parameter
+			///</para>
+			///
+			/// </summary>
+			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement NamedElement
+			{
+				get
+				{
+ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement result = null;
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.NamedElement, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "NamedElement");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Output, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Output");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Input");
+					if (result != null) { return result; };
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
+					if (result != null) { return result; };
+					return result;
+				}
+			}
+			
+			/// <summary>
+			/// Dst ends. NOTE: Does not contain derived classes. Type must exactly match otherwise it is null.
+			/// <para>
+			///-----------------------------------------
+			///</para>
+			///<para>
+			///Type could be:
+			///</para>
+			///<para>
+			///- Output
+			///</para>
+			///
+			/// </summary>
+			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Output Output
+			{
+				get
+				{
+ISIS.GME.Dsml.ValueFlow.Interfaces.Output result = null;
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Output, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Output");
+					if (result != null) { return result; };
+					return result;
+				}
+			}
+			
+			/// <summary>
+			/// Dst ends. NOTE: Does not contain derived classes. Type must exactly match otherwise it is null.
+			/// <para>
+			///-----------------------------------------
+			///</para>
+			///<para>
+			///Type could be:
+			///</para>
+			///<para>
+			///- Input
+			///</para>
+			///
+			/// </summary>
+			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Input Input
+			{
+				get
+				{
+ISIS.GME.Dsml.ValueFlow.Interfaces.Input result = null;
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Input, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Input");
+					if (result != null) { return result; };
+					return result;
+				}
+			}
+			
+			/// <summary>
+			/// Dst ends. NOTE: Does not contain derived classes. Type must exactly match otherwise it is null.
+			/// <para>
+			///-----------------------------------------
+			///</para>
+			///<para>
+			///Type could be:
+			///</para>
+			///<para>
+			///- Parameter
+			///</para>
+			///
+			/// </summary>
+			public virtual ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter Parameter
+			{
+				get
+				{
+ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter result = null;
+result = ISIS.GME.Common.Utils.CastDstEnd<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "Parameter");
 					if (result != null) { return result; };
 					return result;
 				}
@@ -3588,10 +3916,10 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			get
 			{
 				global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Base> result = ISIS.GME.Common.Utils.CastMgaChildren(Impl.ChildObjects, new global::System.Collections.Generic.Dictionary<int, global::System.Type>() { 
-{ 1001 /*Parameter*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.Parameter ) },
 { 1022 /*ValueFlow*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow ) },
-{ 1002 /*Component*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.Component ) },
 { 1031 /*Python*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.Python ) },
+{ 1002 /*Component*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.Component ) },
+{ 1001 /*Parameter*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.Parameter ) },
 { 1018 /*ComplexFormula*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula ) },
 { 1021 /*SimpleFormula*/ , typeof(ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula ) },
 });
@@ -3780,6 +4108,21 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			///<para>
 			///Retrieves with specific kinds in the container.
 			///</para>
+			///</summary>
+			///
+			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow> ValueFlowCollection
+			{
+				get
+				{
+global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "ValueFlow" /* 1022 */);
+return result;
+				}
+			}
+			
+			/// <summary>
+			///<para>
+			///Retrieves with specific kinds in the container.
+			///</para>
 			///<para>
 			///----------------------------------------------------
 			///</para>
@@ -3811,26 +4154,11 @@ return result;
 			///</para>
 			///</summary>
 			///
-			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter> ParameterCollection
+			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Python> PythonCollection
 			{
 				get
 				{
-global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Parameter" /* 1001 */);
-return result;
-				}
-			}
-			
-			/// <summary>
-			///<para>
-			///Retrieves with specific kinds in the container.
-			///</para>
-			///</summary>
-			///
-			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow> ValueFlowCollection
-			{
-				get
-				{
-global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "ValueFlow" /* 1022 */);
+global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Python> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Python, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Python" /* 1031 */);
 return result;
 				}
 			}
@@ -3856,11 +4184,11 @@ return result;
 			///</para>
 			///</summary>
 			///
-			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Python> PythonCollection
+			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter> ParameterCollection
 			{
 				get
 				{
-global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Python> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Python, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Python" /* 1031 */);
+global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Parameter, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Parameter" /* 1001 */);
 return result;
 				}
 			}
@@ -3937,7 +4265,7 @@ return result;
 	
 	/// <summary>
 	/// </summary>
-	public class Parameter : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement
+	public class Parameter : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
 	{
 		
 		/// <summary>
@@ -3957,6 +4285,18 @@ return result;
 		///<para> NULL if the object is not derived.</para>
 		///</summary>
 		ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement.ArcheType
+		{
+			get
+			{
+				return (Impl as global::GME.MGA.MgaFCO).ArcheType == null ? null : ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.Parameter>((Impl as global::GME.MGA.MgaFCO).ArcheType as global::GME.MGA.MgaObject);
+			}
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ArcheType
 		{
 			get
 			{
@@ -3990,6 +4330,14 @@ return result;
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.SrcConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass(Impl);
+			}
+		}
+		
 		/// 
 		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
 		{
@@ -4013,6 +4361,14 @@ return result;
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.DstConnectionsClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.DstConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass(Impl);
 			}
 		}
 		
@@ -4065,6 +4421,18 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.Attributes
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass(this.Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
 		{
@@ -4092,6 +4460,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			}
 		}
 		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ReferencedBy
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass(Impl);
+			}
+		}
+		
 		/// 
 		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
 		{
@@ -4116,6 +4492,14 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			get
 			{
 				return new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.MembersOfSetClass(Impl);
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.MembersOfSet
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass(Impl);
 			}
 		}
 		
@@ -4187,7 +4571,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -4218,7 +4602,7 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 			{
 				get
 				{
-					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow").Concat(ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow"));
+					return ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
 				}
 			}
 		}
@@ -4254,6 +4638,276 @@ if (parentModel != null && parentModel.MetaBase.MetaRef == 1002/*"Component"*/) 
 				{
 					((global::GME.MGA.MgaFCO)(Impl)).StrAttrByName["Value"] = value;
 				}
+			}
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		public class ReferencedByClass
+		{
+			
+			private global::GME.MGA.IMgaObject Impl;
+			
+			/// <summary>
+			///<para></para>
+			///<para></para>
+			///</summary>
+			public ReferencedByClass(global::GME.MGA.IMgaObject impl)
+			{
+				this.Impl = impl;
+			}
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		public class MembersOfSetClass
+		{
+			
+			private global::GME.MGA.IMgaObject Impl;
+			
+			/// <summary>
+			///<para></para>
+			///<para></para>
+			///</summary>
+			public MembersOfSetClass(global::GME.MGA.IMgaObject impl)
+			{
+				this.Impl = impl;
+			}
+		}
+	}
+	
+	/// <summary>
+	/// </summary>
+	public class ValueFlowElement : ISIS.GME.Common.Classes.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
+	{
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ArcheType
+		{
+			get
+			{
+				return (Impl as global::GME.MGA.MgaFCO).ArcheType == null ? null : ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement>((Impl as global::GME.MGA.MgaFCO).ArcheType as global::GME.MGA.MgaObject);
+			}
+		}
+		
+		/// 
+		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
+		{
+			get
+			{
+				global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> result = ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement)(this)).SrcConnections.ValueFlowCollection.Cast<ISIS.GME.Common.Interfaces.Connection>();
+				return result;
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.SrcConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.SrcConnectionsClass(Impl);
+			}
+		}
+		
+		/// 
+		public override global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
+		{
+			get
+			{
+				global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> result = ((ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement)(this)).DstConnections.ValueFlowCollection.Cast<ISIS.GME.Common.Interfaces.Connection>();
+				return result;
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.DstConnections
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.DstConnectionsClass(Impl);
+			}
+		}
+		
+		/// <summary>
+		///<para>Represents the domain specific parent container.</para>
+		///<para></para>
+		///<para>
+		///----------------------------------------------------
+		///</para>
+		///<para>
+		///The parent could be:
+		///</para>
+		///</summary>
+		///
+		public override ISIS.GME.Common.Interfaces.Container ParentContainer
+		{
+			get
+			{
+global::GME.MGA.MgaObject parentFolder = (this.Impl as global::GME.MGA.MgaFCO).ParentFolder as global::GME.MGA.MgaObject;
+global::GME.MGA.MgaObject parentModel = (this.Impl as global::GME.MGA.MgaFCO).ParentModel as global::GME.MGA.MgaObject;
+				return null;
+			}
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.Attributes
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.AttributesClass(this.Impl);
+			}
+		}
+		
+		/// 
+		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
+		{
+			get
+			{
+				global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> result = ISIS.GME.Common.Utils.CastReferencedBy(Impl as global::GME.MGA.MgaFCO, new global::System.Collections.Generic.Dictionary<int, global::System.Type>() {
+});
+				return result;
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.ReferencedBy
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.ReferencedByClass(Impl);
+			}
+		}
+		
+		/// 
+		public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
+		{
+			get
+			{
+				global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> result = ISIS.GME.Common.Utils.CastMembersOfSet(Impl as global::GME.MGA.MgaFCO, new global::System.Collections.Generic.Dictionary<int, global::System.Type>() {
+});
+				return result;
+			}
+		}
+		
+		ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement.MembersOfSet
+		{
+			get
+			{
+				return new ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement.MembersOfSetClass(Impl);
+			}
+		}
+		
+		/// <summary>
+		/// Gets a domain specific object from a COM object.
+		/// </summary>
+		public static ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement Cast(global::GME.MGA.IMgaObject subject)
+		{
+			return ISIS.GME.Common.Utils.CreateObject<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlowElement>(subject);
+		}
+		
+		/// Default role
+		public enum DefaultRole
+		{
+			
+			/// <summary>
+			/// Default role
+			/// </summary>
+			ValueFlowElement,
+		}
+		
+		/// <summary>
+		///<para>WARNING: This part is still under developement.</para>
+		///<para></para>
+		///</summary>
+		public struct Roles
+		{
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		public class SrcConnectionsClass
+		{
+			
+			private global::GME.MGA.IMgaObject Impl;
+			
+			/// <summary>
+			///<para></para>
+			///<para></para>
+			///</summary>
+			public SrcConnectionsClass(global::GME.MGA.IMgaObject impl)
+			{
+				this.Impl = impl;
+			}
+			
+			/// <summary>
+			///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
+			///<para></para>
+			///</summary>
+			public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow> ValueFlowCollection
+			{
+				get
+				{
+					return ISIS.GME.Common.Utils.CastSrcConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
+				}
+			}
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		public class DstConnectionsClass
+		{
+			
+			private global::GME.MGA.IMgaObject Impl;
+			
+			/// <summary>
+			///<para></para>
+			///<para></para>
+			///</summary>
+			public DstConnectionsClass(global::GME.MGA.IMgaObject impl)
+			{
+				this.Impl = impl;
+			}
+			
+			/// <summary>
+			///<para>Retrieves all connections, which have this object as a SOURCE.</para>
+			///<para></para>
+			///</summary>
+			public virtual global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlow> ValueFlowCollection
+			{
+				get
+				{
+					return ISIS.GME.Common.Utils.CastDstConnections<ISIS.GME.Dsml.ValueFlow.Classes.ValueFlow, global::GME.MGA.MgaFCO>(Impl as global::GME.MGA.MgaFCO, "ValueFlow");
+				}
+			}
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		public class AttributesClass
+		{
+			
+			private global::GME.MGA.IMgaObject Impl;
+			
+			/// <summary>
+			///<para></para>
+			///<para></para>
+			///</summary>
+			public AttributesClass(global::GME.MGA.IMgaObject impl)
+			{
+				this.Impl = impl;
 			}
 		}
 		
