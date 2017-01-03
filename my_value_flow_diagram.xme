@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project SYSTEM "mga.dtd">
 
-<project guid="{A41F7B37-C75B-4C28-AFE4-3A26DB35E3EB}" cdate="Tue Dec 20 16:16:33 2016" mdate="Tue Dec 20 16:16:33 2016" version="" metaguid="{847AA7EF-60B1-426D-9B4C-5B242A8EA55A}" metaversion="" metaname="ValueFlow">
+<project guid="{DBE179E4-5363-47BF-88EF-71E6A760891B}" cdate="Mon Jan 02 15:32:02 2017" mdate="Mon Jan 02 15:32:02 2017" version="" metaguid="{82B81F0F-604A-45FF-9900-A7D3E88F8156}" metaversion="" metaname="ValueFlow">
 	<name>RootFolder</name>
 	<comment></comment>
 	<author></author>
@@ -258,7 +258,7 @@
 					<value>scripts/optimizeContainer.py</value>
 				</attribute>
 				<atom id="id-0066-0000000d" kind="Input" role="Input" guid="{f89c20c8-2a1d-4055-af0f-91239f4c11d4}" relid="0x1">
-					<name>Length2</name>
+					<name>L2</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -282,7 +282,7 @@
 					</regnode>
 				</atom>
 				<atom id="id-0066-0000000f" kind="Input" role="Input" guid="{0f37942b-d752-483d-ab6f-e424d2c77d04}" relid="0x3">
-					<name>Width2</name>
+					<name>W2</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -294,7 +294,7 @@
 					</regnode>
 				</atom>
 				<atom id="id-0066-00000010" kind="Input" role="Input" guid="{8eb4af62-69a2-44d4-964b-1b54fb87eb5a}" relid="0x4">
-					<name>Height2</name>
+					<name>H2</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -330,7 +330,7 @@
 					</regnode>
 				</atom>
 				<atom id="id-0066-00000013" kind="Input" role="Input" guid="{ad0898df-054c-4dc4-9b10-2b0bb0b39369}" relid="0x7">
-					<name>Length1</name>
+					<name>L1</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -342,7 +342,7 @@
 					</regnode>
 				</atom>
 				<atom id="id-0066-00000014" kind="Input" role="Input" guid="{8f70c6cb-cb5a-4580-aba0-6295f54d721d}" relid="0x8">
-					<name>Width1</name>
+					<name>W1</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -354,7 +354,7 @@
 					</regnode>
 				</atom>
 				<atom id="id-0066-00000015" kind="Input" role="Input" guid="{047a3f07-075a-4e8f-8156-b9de2892a847}" relid="0x9">
-					<name>Height1</name>
+					<name>H1</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -2015,7 +2015,7 @@
 		</model>
 		<model id="id-0065-0000000e" kind="Component" guid="{42d1a24a-a1f6-4203-b20a-b69d8e3f2034}" relid="0x6" childrelidcntr="0x45">
 			<name>PythonExample</name>
-			<model id="id-0065-00000010" kind="Component" role="Component" guid="{b385c155-7427-4817-a789-9279da868175}" relid="0x1a" childrelidcntr="0x5">
+			<model id="id-0065-0000000f" kind="Component" role="Component" guid="{b385c155-7427-4817-a789-9279da868175}" relid="0x1a" childrelidcntr="0x5">
 				<name>PythonContainer</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2029,7 +2029,7 @@
 				<regnode name="portLabelLength" isopaque="yes">
 					<value>0</value>
 				</regnode>
-				<atom id="id-0066-00000054" kind="Parameter" role="Parameter" guid="{89f5c6a9-877c-46f3-b979-a6282bb4bed9}" relid="0x2">
+				<atom id="id-0066-00000050" kind="Parameter" role="Parameter" guid="{89f5c6a9-877c-46f3-b979-a6282bb4bed9}" relid="0x2">
 					<name>Height</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
@@ -2044,7 +2044,7 @@
 						<value></value>
 					</attribute>
 				</atom>
-				<atom id="id-0066-00000055" kind="Parameter" role="Parameter" guid="{e36998d3-53f6-41d2-b7d2-643c29a3e0a8}" relid="0x4">
+				<atom id="id-0066-00000051" kind="Parameter" role="Parameter" guid="{e36998d3-53f6-41d2-b7d2-643c29a3e0a8}" relid="0x4">
 					<name>Length</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
@@ -2059,7 +2059,7 @@
 						<value></value>
 					</attribute>
 				</atom>
-				<atom id="id-0066-00000056" kind="Parameter" role="Parameter" guid="{a749e3b8-b67c-45dd-8be8-76132ccafd84}" relid="0x3">
+				<atom id="id-0066-00000052" kind="Parameter" role="Parameter" guid="{a749e3b8-b67c-45dd-8be8-76132ccafd84}" relid="0x3">
 					<name>Width</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
@@ -2074,7 +2074,7 @@
 						<value></value>
 					</attribute>
 				</atom>
-				<atom id="id-0066-00000057" kind="Parameter" role="Parameter" guid="{5b92329c-912f-4ffe-bf68-c95ad8b08a04}" relid="0x5">
+				<atom id="id-0066-00000053" kind="Parameter" role="Parameter" guid="{5b92329c-912f-4ffe-bf68-c95ad8b08a04}" relid="0x5">
 					<name>Volume</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
@@ -2090,7 +2090,7 @@
 					</attribute>
 				</atom>
 			</model>
-			<model id="id-0065-00000012" kind="Python" role="Python" guid="{a2ab92de-31b1-45eb-b7db-ef9c52987679}" relid="0x1b" childrelidcntr="0xa">
+			<model id="id-0065-00000010" kind="Python" role="Python" guid="{a2ab92de-31b1-45eb-b7db-ef9c52987679}" relid="0x1b" childrelidcntr="0xa">
 				<name>OptimizeContainerSize</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2107,8 +2107,8 @@
 				<attribute kind="Filename">
 					<value>scripts/optimizeContainer.py</value>
 				</attribute>
-				<atom id="id-0066-0000005e" kind="Input" role="Input" guid="{609ad265-5ff1-4f29-9193-af638ebf24ac}" relid="0x7">
-					<name>Length1</name>
+				<atom id="id-0066-00000054" kind="Input" role="Input" guid="{609ad265-5ff1-4f29-9193-af638ebf24ac}" relid="0x7">
+					<name>L1</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -2119,7 +2119,7 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-0000005f" kind="Output" role="Output" guid="{64d05ca4-c62a-4bf6-b23b-a4358683e033}" relid="0x2">
+				<atom id="id-0066-00000055" kind="Output" role="Output" guid="{64d05ca4-c62a-4bf6-b23b-a4358683e033}" relid="0x2">
 					<name>Length</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
@@ -2131,8 +2131,8 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-00000060" kind="Input" role="Input" guid="{e345ae94-9b64-49c2-b5a2-0f1a2961ef26}" relid="0x9">
-					<name>Height1</name>
+				<atom id="id-0066-00000056" kind="Input" role="Input" guid="{e345ae94-9b64-49c2-b5a2-0f1a2961ef26}" relid="0x9">
+					<name>H1</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -2143,8 +2143,8 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-00000061" kind="Input" role="Input" guid="{2cb44422-7941-4cd3-be40-4eb6a32165c6}" relid="0x3">
-					<name>Width2</name>
+				<atom id="id-0066-00000057" kind="Input" role="Input" guid="{2cb44422-7941-4cd3-be40-4eb6a32165c6}" relid="0x3">
+					<name>W2</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -2155,8 +2155,8 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-00000062" kind="Input" role="Input" guid="{ea966bbf-92f3-4efb-b6d4-4e633a64c511}" relid="0x4">
-					<name>Height2</name>
+				<atom id="id-0066-00000058" kind="Input" role="Input" guid="{ea966bbf-92f3-4efb-b6d4-4e633a64c511}" relid="0x4">
+					<name>H2</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -2167,8 +2167,8 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-00000063" kind="Input" role="Input" guid="{2d04b2e3-8a82-41a5-b9da-d490b0bfede5}" relid="0x8">
-					<name>Width1</name>
+				<atom id="id-0066-00000059" kind="Input" role="Input" guid="{2d04b2e3-8a82-41a5-b9da-d490b0bfede5}" relid="0x8">
+					<name>W1</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -2179,7 +2179,7 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-00000064" kind="Output" role="Output" guid="{9e1cfad7-6244-4695-a0a5-21e3f1af6d21}" relid="0x5">
+				<atom id="id-0066-0000005a" kind="Output" role="Output" guid="{9e1cfad7-6244-4695-a0a5-21e3f1af6d21}" relid="0x5">
 					<name>Width</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
@@ -2191,7 +2191,7 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-00000065" kind="Output" role="Output" guid="{1c5af0a0-a4cd-4b75-99e8-9b1788cb52d5}" relid="0xa">
+				<atom id="id-0066-0000005b" kind="Output" role="Output" guid="{1c5af0a0-a4cd-4b75-99e8-9b1788cb52d5}" relid="0xa">
 					<name>Volume</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
@@ -2203,8 +2203,8 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-00000066" kind="Input" role="Input" guid="{041bb040-a3cb-41ec-b477-5346a6f53839}" relid="0x1">
-					<name>Length2</name>
+				<atom id="id-0066-0000005c" kind="Input" role="Input" guid="{041bb040-a3cb-41ec-b477-5346a6f53839}" relid="0x1">
+					<name>L2</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
 						<regnode name="Aspect" status="undefined">
@@ -2215,7 +2215,7 @@
 						</regnode>
 					</regnode>
 				</atom>
-				<atom id="id-0066-00000067" kind="Output" role="Output" guid="{3cb4c495-8f12-4c4f-ab7a-a6275c120840}" relid="0x6">
+				<atom id="id-0066-0000005d" kind="Output" role="Output" guid="{3cb4c495-8f12-4c4f-ab7a-a6275c120840}" relid="0x6">
 					<name>Height</name>
 					<regnode name="PartRegs" status="undefined">
 						<value></value>
@@ -2228,7 +2228,7 @@
 					</regnode>
 				</atom>
 			</model>
-			<atom id="id-0066-0000005c" kind="Parameter" role="Parameter" guid="{875b1649-e2b3-436f-af3f-ae03e1c9d54c}" relid="0x3">
+			<atom id="id-0066-0000005e" kind="Parameter" role="Parameter" guid="{875b1649-e2b3-436f-af3f-ae03e1c9d54c}" relid="0x3">
 				<name>Box2Width</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2246,7 +2246,7 @@
 					<value>7</value>
 				</attribute>
 			</atom>
-			<atom id="id-0066-0000005d" kind="Parameter" role="Parameter" guid="{af2759ce-b6b1-4ed8-b5b9-b7750b560983}" relid="0x2">
+			<atom id="id-0066-0000005f" kind="Parameter" role="Parameter" guid="{af2759ce-b6b1-4ed8-b5b9-b7750b560983}" relid="0x2">
 				<name>Box1Width</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2264,7 +2264,7 @@
 					<value>13</value>
 				</attribute>
 			</atom>
-			<atom id="id-0066-00000068" kind="Parameter" role="Parameter" guid="{20d6c7a1-5042-46f6-8560-ff9d6a3e8869}" relid="0xa">
+			<atom id="id-0066-00000060" kind="Parameter" role="Parameter" guid="{20d6c7a1-5042-46f6-8560-ff9d6a3e8869}" relid="0xa">
 				<name>Box1Height</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2282,7 +2282,7 @@
 					<value>8</value>
 				</attribute>
 			</atom>
-			<atom id="id-0066-00000069" kind="Parameter" role="Parameter" guid="{f878961e-4dd1-48fa-96fa-bc6e13fe26a5}" relid="0xd">
+			<atom id="id-0066-00000061" kind="Parameter" role="Parameter" guid="{f878961e-4dd1-48fa-96fa-bc6e13fe26a5}" relid="0xd">
 				<name>Box2Height</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2300,7 +2300,7 @@
 					<value>20</value>
 				</attribute>
 			</atom>
-			<atom id="id-0066-0000006b" kind="Parameter" role="Parameter" guid="{c5986af3-2d11-44e1-8d66-9b8c49c02c0a}" relid="0xb">
+			<atom id="id-0066-00000062" kind="Parameter" role="Parameter" guid="{c5986af3-2d11-44e1-8d66-9b8c49c02c0a}" relid="0xb">
 				<name>Box2Length</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2318,7 +2318,7 @@
 					<value>10</value>
 				</attribute>
 			</atom>
-			<atom id="id-0066-0000006d" kind="Parameter" role="Parameter" guid="{ea2323e1-861c-423f-8d68-c9bb81612034}" relid="0xc">
+			<atom id="id-0066-00000063" kind="Parameter" role="Parameter" guid="{ea2323e1-861c-423f-8d68-c9bb81612034}" relid="0xc">
 				<name>Box1Length</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2336,85 +2336,85 @@
 					<value>10</value>
 				</attribute>
 			</atom>
-			<connection id="id-0068-0000004e" kind="ValueFlow" role="ValueFlow" guid="{df7854ab-6c6b-4d70-abcf-ed75214c9967}" relid="0x1c">
+			<connection id="id-0068-00000047" kind="ValueFlow" role="ValueFlow" guid="{df7854ab-6c6b-4d70-abcf-ed75214c9967}" relid="0x1c">
 				<name>ValueFlow</name>
 				<attribute kind="Name" status="meta">
 					<value></value>
 				</attribute>
-				<connpoint role="dst" target="id-0066-00000066"/>
-				<connpoint role="src" target="id-0066-0000006b"/>
+				<connpoint role="dst" target="id-0066-0000005c"/>
+				<connpoint role="src" target="id-0066-00000062"/>
 			</connection>
-			<connection id="id-0068-00000050" kind="ValueFlow" role="ValueFlow" guid="{1701ef5e-c206-4fce-b1d4-6a9fcdeebaf9}" relid="0x20">
+			<connection id="id-0068-00000048" kind="ValueFlow" role="ValueFlow" guid="{1701ef5e-c206-4fce-b1d4-6a9fcdeebaf9}" relid="0x20">
 				<name>ValueFlow</name>
 				<attribute kind="Name" status="meta">
 					<value></value>
 				</attribute>
-				<connpoint role="dst" target="id-0066-00000056"/>
-				<connpoint role="src" target="id-0066-00000064"/>
+				<connpoint role="dst" target="id-0066-00000052"/>
+				<connpoint role="src" target="id-0066-0000005a"/>
 			</connection>
-			<connection id="id-0068-00000054" kind="ValueFlow" role="ValueFlow" guid="{46974242-34cf-45d2-bb86-1a7a532d955c}" relid="0x1d">
-				<name>ValueFlow</name>
-				<attribute kind="Name" status="meta">
-					<value></value>
-				</attribute>
-				<connpoint role="src" target="id-0066-0000005c"/>
-				<connpoint role="dst" target="id-0066-00000061"/>
-			</connection>
-			<connection id="id-0068-0000005b" kind="ValueFlow" role="ValueFlow" guid="{5119ef28-4fb7-4275-8810-969ce59e4702}" relid="0x2e">
-				<name>ValueFlow</name>
-				<attribute kind="Name" status="meta">
-					<value></value>
-				</attribute>
-				<connpoint role="dst" target="id-0066-0000005e"/>
-				<connpoint role="src" target="id-0066-0000006d"/>
-			</connection>
-			<connection id="id-0068-0000005c" kind="ValueFlow" role="ValueFlow" guid="{3e80ff6d-a5c3-4436-97d4-8e2a51832e2e}" relid="0x2f">
-				<name>ValueFlow</name>
-				<attribute kind="Name" status="meta">
-					<value></value>
-				</attribute>
-				<connpoint role="src" target="id-0066-0000005d"/>
-				<connpoint role="dst" target="id-0066-00000063"/>
-			</connection>
-			<connection id="id-0068-0000005e" kind="ValueFlow" role="ValueFlow" guid="{cb148246-3f1e-41ad-8c9d-9f2ad7c0f375}" relid="0x30">
-				<name>ValueFlow</name>
-				<attribute kind="Name" status="meta">
-					<value></value>
-				</attribute>
-				<connpoint role="dst" target="id-0066-00000060"/>
-				<connpoint role="src" target="id-0066-00000068"/>
-			</connection>
-			<connection id="id-0068-00000062" kind="ValueFlow" role="ValueFlow" guid="{b8cfc6c1-94bd-4165-91d2-c0c1bcc6e6be}" relid="0x33">
-				<name>ValueFlow</name>
-				<attribute kind="Name" status="meta">
-					<value></value>
-				</attribute>
-				<connpoint role="dst" target="id-0066-00000055"/>
-				<connpoint role="src" target="id-0066-0000005f"/>
-			</connection>
-			<connection id="id-0068-00000064" kind="ValueFlow" role="ValueFlow" guid="{08054805-b501-42e4-8c4c-5b5c091a3296}" relid="0x39">
+			<connection id="id-0068-00000049" kind="ValueFlow" role="ValueFlow" guid="{46974242-34cf-45d2-bb86-1a7a532d955c}" relid="0x1d">
 				<name>ValueFlow</name>
 				<attribute kind="Name" status="meta">
 					<value></value>
 				</attribute>
 				<connpoint role="dst" target="id-0066-00000057"/>
-				<connpoint role="src" target="id-0066-00000065"/>
+				<connpoint role="src" target="id-0066-0000005e"/>
 			</connection>
-			<connection id="id-0068-00000065" kind="ValueFlow" role="ValueFlow" guid="{67874433-3676-4399-b39e-e6fcb7b60f3b}" relid="0x34">
+			<connection id="id-0068-0000004a" kind="ValueFlow" role="ValueFlow" guid="{5119ef28-4fb7-4275-8810-969ce59e4702}" relid="0x2e">
 				<name>ValueFlow</name>
 				<attribute kind="Name" status="meta">
 					<value></value>
 				</attribute>
 				<connpoint role="dst" target="id-0066-00000054"/>
-				<connpoint role="src" target="id-0066-00000067"/>
+				<connpoint role="src" target="id-0066-00000063"/>
 			</connection>
-			<connection id="id-0068-00000067" kind="ValueFlow" role="ValueFlow" guid="{2c91cea5-53c8-4dc6-b842-78f0f0e65c5c}" relid="0x45">
+			<connection id="id-0068-0000004b" kind="ValueFlow" role="ValueFlow" guid="{3e80ff6d-a5c3-4436-97d4-8e2a51832e2e}" relid="0x2f">
 				<name>ValueFlow</name>
 				<attribute kind="Name" status="meta">
 					<value></value>
 				</attribute>
-				<connpoint role="dst" target="id-0066-00000062"/>
-				<connpoint role="src" target="id-0066-00000069"/>
+				<connpoint role="dst" target="id-0066-00000059"/>
+				<connpoint role="src" target="id-0066-0000005f"/>
+			</connection>
+			<connection id="id-0068-0000004c" kind="ValueFlow" role="ValueFlow" guid="{cb148246-3f1e-41ad-8c9d-9f2ad7c0f375}" relid="0x30">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000056"/>
+				<connpoint role="src" target="id-0066-00000060"/>
+			</connection>
+			<connection id="id-0068-0000004d" kind="ValueFlow" role="ValueFlow" guid="{b8cfc6c1-94bd-4165-91d2-c0c1bcc6e6be}" relid="0x33">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000051"/>
+				<connpoint role="src" target="id-0066-00000055"/>
+			</connection>
+			<connection id="id-0068-0000004e" kind="ValueFlow" role="ValueFlow" guid="{08054805-b501-42e4-8c4c-5b5c091a3296}" relid="0x39">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000053"/>
+				<connpoint role="src" target="id-0066-0000005b"/>
+			</connection>
+			<connection id="id-0068-0000004f" kind="ValueFlow" role="ValueFlow" guid="{67874433-3676-4399-b39e-e6fcb7b60f3b}" relid="0x34">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000050"/>
+				<connpoint role="src" target="id-0066-0000005d"/>
+			</connection>
+			<connection id="id-0068-00000050" kind="ValueFlow" role="ValueFlow" guid="{2c91cea5-53c8-4dc6-b842-78f0f0e65c5c}" relid="0x45">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000058"/>
+				<connpoint role="src" target="id-0066-00000061"/>
 			</connection>
 		</model>
 	</folder>

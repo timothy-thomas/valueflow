@@ -4154,11 +4154,11 @@ return result;
 			///</para>
 			///</summary>
 			///
-			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Python> PythonCollection
+			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Component> ComponentCollection
 			{
 				get
 				{
-global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Python> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Python, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Python" /* 1031 */);
+global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Component> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Component, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Component" /* 1002 */);
 return result;
 				}
 			}
@@ -4169,11 +4169,11 @@ return result;
 			///</para>
 			///</summary>
 			///
-			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Component> ComponentCollection
+			public global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Python> PythonCollection
 			{
 				get
 				{
-global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Component> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Component, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Component" /* 1002 */);
+global::System.Collections.Generic.IEnumerable<ISIS.GME.Dsml.ValueFlow.Interfaces.Python> result = ISIS.GME.Common.Utils.CastMgaChildren<ISIS.GME.Dsml.ValueFlow.Classes.Python, global::GME.MGA.MgaObjects>(Impl.ChildObjects, "Python" /* 1031 */);
 return result;
 				}
 			}

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using GME.CSharp;
 using GME;
 using GME.MGA;
@@ -59,9 +60,9 @@ namespace ValueFlowInterpreter
             public List<System.Guid> dependencies;
         }
         
-        class AssignmentLine : ValueFlowElement
+        class Parameter : ValueFlowElement
         {
-            public AssignmentLine(string nm, System.Guid id, string val)
+            public Parameter(string nm, System.Guid id, string val)
             {
                 name = nm;
                 guid = id;
@@ -69,7 +70,7 @@ namespace ValueFlowInterpreter
                 value = val;
             }
 
-            public AssignmentLine(string nm, System.Guid id, System.Guid dep)
+            public Parameter(string nm, System.Guid id, System.Guid dep)
             {
                 name = nm;
                 guid = id;
@@ -90,6 +91,8 @@ namespace ValueFlowInterpreter
             public string simpleType;
             public Dictionary<System.Guid, string> complexMapping;
             public string body;
+            public string python_filename;
+            public List<System.Guid> outputs;
 
             public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string simTy)
             {
@@ -122,17 +125,19 @@ namespace ValueFlowInterpreter
                 body = bd;
             }
 
-            //public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, )
-            //{
-            //    known = false;
-            //    name = nm;
-            //    guid = id;
-            //    dependencies = deps;
-            //    type = ty;
-            //}
+            public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string fn, List<System.Guid> op)
+            {
+                known = false;
+                name = nm;
+                guid = id;
+                type = ty;
+                python_filename = fn;
+                dependencies = deps;
+                outputs = op;
+            }
         }
 
-        void BuildLists(string parents, VF.Component component, List<string> components, List<AssignmentLine> assignmentLines, List<Function> functions)
+        void BuildLists(string parents, VF.Component component, List<string> components, List<Parameter> assignmentLines, List<Function> functions)
         {
             components.Add(parents + component.Name);
             parents = parents + component.Name + ".";
@@ -144,12 +149,12 @@ namespace ValueFlowInterpreter
                 if (!p.SrcConnections.ValueFlowCollection.Any()) // No incoming ValueFlow connections
                 {
                     // Value is Constant
-                    assignmentLines.Add(new AssignmentLine(parents + p.Name, p.Guid, p.Attributes.Value));
+                    assignmentLines.Add(new Parameter(parents + p.Name, p.Guid, p.Attributes.Value));
                 }
                 else
                 {
                     var dep = p.SrcConnections.ValueFlowCollection.First().SrcEnd.Guid;
-                    assignmentLines.Add(new AssignmentLine(parents + p.Name, p.Guid, dep));
+                    assignmentLines.Add(new Parameter(parents + p.Name, p.Guid, dep));
                 }
             }
 
@@ -176,10 +181,38 @@ namespace ValueFlowInterpreter
                 functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.COMPLEX, table, body));
             }
 
-            //foreach (var f in component.Children.PythonCollection)
-            //{
-            //    functions.Add(new Function(parents + f.Name, f));
-            //}
+            foreach (var f in component.Children.PythonCollection)
+            {
+                var filename = System.IO.Path.GetFileName(f.Attributes.Filename);
+                System.IO.File.Copy(f.Attributes.Filename, filename, true);
+                string pythonBody = System.IO.File.ReadAllText(filename);
+                
+                // Sort Dependencies and Outputs based on order in function.
+                var deps = new List<System.Guid>();
+                var outputs = new List<System.Guid>();
+
+                List<string> pyArgs = new Regex(System.IO.Path.GetFileNameWithoutExtension(filename)+@"\((.*)\)").Match(pythonBody).Groups[1].Captures[0].ToString().Split(',').Select(p => p.Trim()).ToList();
+                List<string> pyReturnVals = new Regex(@"return\s+\[(.*)\]").Match(pythonBody).Groups[1].Captures[0].ToString().Split(',').Select(p => p.Trim()).ToList();
+
+                foreach (var arg in pyArgs)
+                {
+                    if (f.Children.InputCollection.Select(x => x.Name).Contains(arg))
+                    {
+                        var input = f.Children.InputCollection.First(x => x.Name == arg);
+                        var dep = input.SrcConnections.ValueFlowCollection.First().SrcEnd.Guid;
+                        deps.Add(dep);
+                    }
+                }
+                foreach (var returnVal in pyReturnVals)
+                {
+                    if(f.Children.OutputCollection.Select(x => x.Name).Contains(returnVal))
+                    {
+                        var output = f.Children.OutputCollection.First(x => x.Name == returnVal);
+                        outputs.Add(output.Guid);
+                    }
+                }
+                functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.PYTHON, f.Attributes.Filename, outputs));
+            }
 
             foreach (VF.Component c in component.Children.ComponentCollection) {
                 BuildLists(parents, c, components, assignmentLines, functions);
@@ -227,7 +260,7 @@ namespace ValueFlowInterpreter
                 var components = new List<string>();
 
                 // constants and function references list
-                var assignmentLines = new List<AssignmentLine>();
+                var assignmentLines = new List<Parameter>();
 
                 // functions
                 var functions = new List<Function>();
@@ -262,9 +295,11 @@ namespace ValueFlowInterpreter
                     {
                         file.WriteLine("parameters[\"" + c.Replace(".", "\"][\"") + "\"] = dict()");
                     }
+                    file.WriteLine("pythonResults = list()");
 
                     var knownElements = new List<System.Guid>();
                     var values = new Dictionary<System.Guid, string>();
+                    int pythonResultCount = 0;
 
                     int lastCount = -1;
                     int count = 0;
@@ -294,37 +329,25 @@ namespace ValueFlowInterpreter
 
                         foreach (var f in functions.Where(x => !knownElements.Contains(x.guid)))
                         {
-                            if (f.type == Function.FunctionType.SIMPLE)
+                            var allDepsSatisfied = true;
+                            foreach (var dep in f.dependencies)
                             {
-                                var allDepsSatisfied = true;
-                                foreach (var dep in f.dependencies)
+                                if (!knownElements.Contains(dep))
                                 {
-                                    if (!knownElements.Contains(dep))
-                                    {
-                                        allDepsSatisfied = false;
-                                        break;
-                                    }
+                                    allDepsSatisfied = false;
+                                    break;
                                 }
-                                if (allDepsSatisfied)
+                            }
+                            if (allDepsSatisfied)
+                            {
+                                if (f.type == Function.FunctionType.SIMPLE)
                                 {
                                     var valueString = Function.simpleFunctionTransform[f.simpleType] + "(" + String.Join(",",f.dependencies.Select(x => values[x]).ToList()) + ")";
                                     knownElements.Add(f.guid);
                                     values.Add(f.guid, valueString);
                                     count++;
                                 }
-                            }
-                            else if (f.type == Function.FunctionType.COMPLEX)
-                            {
-                                var allDepsSatisfied = true;
-                                foreach (var dep in f.dependencies)
-                                {
-                                    if (!knownElements.Contains(dep))
-                                    {
-                                        allDepsSatisfied = false;
-                                        break;
-                                    }
-                                }
-                                if (allDepsSatisfied)
+                                else if (f.type == Function.FunctionType.COMPLEX)
                                 {
                                     var valueMapping = new Dictionary<string, string>();
                                     foreach (var dep in f.dependencies)
@@ -335,14 +358,35 @@ namespace ValueFlowInterpreter
                                     foreach (var kvp in valueMapping)
                                         output.Replace(kvp.Key, kvp.Value);
                                     var valueString = output.ToString();
-                                    // Only Allow unary operator to be assigned, i.e. not "5+7" or "5/7", but "(5+7)", "(5/7)", or "max(5,7)"
-                                    if (!System.Text.RegularExpressions.Regex.IsMatch(valueString, @"^[a-zA-Z]*\(.*\)$"))
-                                    {
-                                        valueString = "(" + valueString + ")";
-                                    }
+                                    // Objective: Only Allow final Order of Operations Operator to be a unary operator, i.e. not "5+7" or "5/7", but "(5+7)", "(5/7)", or "max(5,7)"
+                                    // TODO: Fix false positive when fed "max(2,3)+max(3,5)" which still need to be wrapped
+                                    //if (!Regex.IsMatch(valueString, @"^[a-zA-Z]*\(.*\)$"))
+                                    //{
+                                    //    valueString = "(" + valueString + ")";
+                                    //}
+                                    // Instead, just wrap every answer in a pair of parentheses
+                                    valueString = "(" + valueString + ")";
                                     knownElements.Add(f.guid);
                                     values.Add(f.guid, valueString);
                                     count++;
+                                }
+                                else if (f.type == Function.FunctionType.PYTHON)
+                                {
+                                    var functionName = Path.GetFileNameWithoutExtension(f.python_filename);
+                                    file.WriteLine("import " + functionName);
+                                    file.WriteLine("pythonResults.append("+ functionName + "." + functionName + "(");
+                                    file.Write("    " + String.Join(",\n    ",f.dependencies.Select(x => values[x]).ToList()));
+                                    file.WriteLine("))");
+                                    int i = 0;
+                                    foreach (var output in f.outputs)
+                                    {
+                                        var valueString = "pythonResults[" + pythonResultCount + "][" + i++ + "]";
+                                        knownElements.Add(output);
+                                        values.Add(output, valueString);
+                                        count++;
+                                    }
+                                    knownElements.Add(f.guid);
+                                    pythonResultCount++;
                                 }
                             }
                         }
