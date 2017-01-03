@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project SYSTEM "mga.dtd">
 
-<project guid="{DC8B3579-9890-4E1D-B2DE-ECF837C3EA76}" cdate="Tue Dec 20 13:14:04 2016" mdate="Tue Dec 20 13:14:04 2016" version="" metaguid="{C84D2738-4519-44F2-B4C1-114F73567576}" metaversion="" metaname="MetaGME">
+<project guid="{835D4947-BD89-414F-BC85-8AEFDE99C4C1}" cdate="Tue Jan 03 10:10:10 2017" mdate="Tue Jan 03 10:10:10 2017" version="" metaguid="{C84D2738-4519-44F2-B4C1-114F73567576}" metaversion="" metaname="MetaGME">
 	<name>ValueFlow</name>
 	<comment></comment>
 	<author></author>
@@ -409,7 +409,7 @@
 				</regnode>
 			</regnode>
 		</regnode>
-		<model id="id-0065-00000001" kind="ParadigmSheet" guid="{6cf1046b-5e7e-4cac-a406-b803a3aaee78}" relid="0x1" childrelidcntr="0x7b">
+		<model id="id-0065-00000001" kind="ParadigmSheet" guid="{6cf1046b-5e7e-4cac-a406-b803a3aaee78}" relid="0x1" childrelidcntr="0x7d">
 			<name>ValueFlowParadigm</name>
 			<atom id="id-0066-00000001" kind="Atom" role="Atom" guid="{79069a5f-69be-4658-901c-59f08e834ea5}" relid="0x1">
 				<name>Parameter</name>
@@ -1811,7 +1811,7 @@ Minimum</value>
 					<value></value>
 				</attribute>
 			</atom>
-			<atom id="id-0066-00000016" kind="Constraint" role="Constraint" guid="{24881da6-dc88-4947-a7b0-3689011ab29b}" relid="0x66">
+			<atom id="id-0066-00000012" kind="Constraint" role="Constraint" guid="{24881da6-dc88-4947-a7b0-3689011ab29b}" relid="0x66">
 				<name>NoMathBlockLoops</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -1894,7 +1894,7 @@ Minimum</value>
 					<value>false</value>
 				</attribute>
 			</atom>
-			<atom id="id-0066-00000017" kind="Atom" role="Atom" guid="{807141f2-d661-45cc-8080-7a2cb4037fb3}" relid="0x6a">
+			<atom id="id-0066-00000013" kind="Atom" role="Atom" guid="{807141f2-d661-45cc-8080-7a2cb4037fb3}" relid="0x6a">
 				<name>ValueFlowElement</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2008,7 +2008,7 @@ Minimum</value>
 					<value></value>
 				</attribute>
 			</atom>
-			<atom id="id-0066-00000018" kind="Inheritance" role="Inheritance" guid="{2e4b808b-2597-44e9-8df9-70efba5b48e6}" relid="0x6b">
+			<atom id="id-0066-00000014" kind="Inheritance" role="Inheritance" guid="{2e4b808b-2597-44e9-8df9-70efba5b48e6}" relid="0x6b">
 				<name>Inheritance</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2044,7 +2044,7 @@ Minimum</value>
 					</regnode>
 				</regnode>
 			</atom>
-			<atom id="id-0066-00000019" kind="Connector" role="Connector" guid="{22050097-1e32-4149-86cd-3623cb802378}" relid="0x73">
+			<atom id="id-0066-00000015" kind="Connector" role="Connector" guid="{22050097-1e32-4149-86cd-3623cb802378}" relid="0x73">
 				<name>Connector</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2068,7 +2068,7 @@ Minimum</value>
 					</regnode>
 				</regnode>
 			</atom>
-			<atom id="id-0066-0000001a" kind="Constraint" role="Constraint" guid="{c86b32c8-2078-4101-b944-e6b8d26ec295}" relid="0x7a">
+			<atom id="id-0066-00000016" kind="Constraint" role="Constraint" guid="{c86b32c8-2078-4101-b944-e6b8d26ec295}" relid="0x7a">
 				<name>OnlyOneSource</name>
 				<regnode name="PartRegs" status="undefined">
 					<value></value>
@@ -2081,7 +2081,7 @@ Minimum</value>
 					<regnode name="Constraints" status="undefined">
 						<value></value>
 						<regnode name="Position" isopaque="yes">
-							<value>644,378</value>
+							<value>637,378</value>
 						</regnode>
 					</regnode>
 				</regnode>
@@ -2104,11 +2104,93 @@ Minimum</value>
 					<value>false</value>
 				</attribute>
 				<attribute kind="ConstraintDescription">
-					<value>Parameters and Inputs can only have one ValueFlow source..</value>
+					<value>Parameters and Inputs can only have one ValueFlow source.</value>
 				</attribute>
 				<attribute kind="ConstraintEqn">
-					<value>let dstCount = self.attachingConnections( &quot;src&quot;, meta::ValueFlow ) -&gt; size in
-                     (dstCount &lt;= 1)</value>
+					<value>let srcCount = self.attachingConnections( &quot;dst&quot;, meta::ValueFlow ) -&gt; size in
+                     (srcCount &lt;= 1)</value>
+				</attribute>
+				<attribute kind="ConstraintParam" status="meta">
+					<value></value>
+				</attribute>
+				<attribute kind="ConstraintPriority" status="meta">
+					<value>2</value>
+				</attribute>
+				<attribute kind="CreateEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="DeleteEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="Depth" status="meta">
+					<value>1</value>
+				</attribute>
+				<attribute kind="DeriveEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="DisconnectEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="LostChildEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="MoveEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="NewChildEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="ReferenceEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="RemoveSetEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="UnReferenceEvent" status="meta">
+					<value>false</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-00000017" kind="Constraint" role="Constraint" guid="{9bf5de91-1dbf-48c6-8646-55454bf25b66}" relid="0x7c">
+				<name>NoSource</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="All" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>644,371</value>
+						</regnode>
+					</regnode>
+					<regnode name="Constraints" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>623,686</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="AddSetEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="ChangeAttributeEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="ChangePropertyEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="ChangeRelationEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="CloseEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="ConnectEvent" status="meta">
+					<value>false</value>
+				</attribute>
+				<attribute kind="ConstraintDescription">
+					<value>Outputs can have no ValueFlow source.</value>
+				</attribute>
+				<attribute kind="ConstraintEqn">
+					<value>let srcCount = self.attachingConnections( &quot;dst&quot;, meta::ValueFlow ) -&gt; size in
+                     (srcCount &lt; 1)</value>
 				</attribute>
 				<attribute kind="ConstraintParam" status="meta">
 					<value></value>
@@ -2317,15 +2399,15 @@ Minimum</value>
 				<connpoint role="dst" target="id-0066-00000001"/>
 				<connpoint role="src" target="id-0066-00000010"/>
 			</connection>
-			<connection id="id-0068-00000020" kind="HasConstraint" role="HasConstraint" guid="{6480ff80-bd93-4cc5-a65d-a703b6a39c61}" relid="0x68">
+			<connection id="id-0068-00000014" kind="HasConstraint" role="HasConstraint" guid="{6480ff80-bd93-4cc5-a65d-a703b6a39c61}" relid="0x68">
 				<name>HasConstraint</name>
 				<regnode name="customConnectionData" isopaque="yes">
 					<value>0,2,0,1,1,1,0,175,0,0</value>
 				</regnode>
 				<connpoint role="dst" target="id-0066-00000004"/>
-				<connpoint role="src" target="id-0066-00000016"/>
+				<connpoint role="src" target="id-0066-00000012"/>
 			</connection>
-			<connection id="id-0068-00000021" kind="Containment" role="Containment" guid="{35601fc0-b902-441c-8a52-9b03b187d481}" relid="0x69">
+			<connection id="id-0068-00000015" kind="Containment" role="Containment" guid="{35601fc0-b902-441c-8a52-9b03b187d481}" relid="0x69">
 				<name>Containment</name>
 				<attribute kind="Cardinality" status="meta">
 					<value>0..*</value>
@@ -2339,31 +2421,31 @@ Minimum</value>
 				<connpoint role="dst" target="id-0066-00000002"/>
 				<connpoint role="src" target="id-0066-0000000d"/>
 			</connection>
-			<connection id="id-0068-00000027" kind="DerivedInheritance" role="DerivedInheritance" guid="{9c3fdceb-5054-415a-8c7f-1c4645d640d0}" relid="0x70">
+			<connection id="id-0068-00000016" kind="DerivedInheritance" role="DerivedInheritance" guid="{9c3fdceb-5054-415a-8c7f-1c4645d640d0}" relid="0x70">
 				<name>DerivedInheritance</name>
 				<regnode name="autorouterPref" isopaque="yes">
 					<value>Sn</value>
 				</regnode>
 				<connpoint role="dst" target="id-0066-0000000f"/>
-				<connpoint role="src" target="id-0066-00000018"/>
+				<connpoint role="src" target="id-0066-00000014"/>
 			</connection>
-			<connection id="id-0068-00000028" kind="BaseInheritance" role="BaseInheritance" guid="{5daf5ae8-bd02-4581-91b7-d469e614aca1}" relid="0x71">
+			<connection id="id-0068-00000017" kind="BaseInheritance" role="BaseInheritance" guid="{5daf5ae8-bd02-4581-91b7-d469e614aca1}" relid="0x71">
 				<name>BaseInheritance</name>
 				<regnode name="autorouterPref" isopaque="yes">
 					<value>Sn</value>
 				</regnode>
-				<connpoint role="src" target="id-0066-00000017"/>
-				<connpoint role="dst" target="id-0066-00000018"/>
+				<connpoint role="src" target="id-0066-00000013"/>
+				<connpoint role="dst" target="id-0066-00000014"/>
 			</connection>
-			<connection id="id-0068-00000029" kind="DerivedInheritance" role="DerivedInheritance" guid="{0c0aa4a0-0242-4895-91d5-5c654682b931}" relid="0x72">
+			<connection id="id-0068-00000018" kind="DerivedInheritance" role="DerivedInheritance" guid="{0c0aa4a0-0242-4895-91d5-5c654682b931}" relid="0x72">
 				<name>DerivedInheritance</name>
 				<regnode name="autorouterPref" isopaque="yes">
 					<value>Sn</value>
 				</regnode>
 				<connpoint role="dst" target="id-0066-0000000d"/>
-				<connpoint role="src" target="id-0066-00000018"/>
+				<connpoint role="src" target="id-0066-00000014"/>
 			</connection>
-			<connection id="id-0068-0000002a" kind="SourceToConnector" role="SourceToConnector" guid="{aabc815a-0077-41a6-92c2-cc823fe6d15d}" relid="0x74">
+			<connection id="id-0068-00000019" kind="SourceToConnector" role="SourceToConnector" guid="{aabc815a-0077-41a6-92c2-cc823fe6d15d}" relid="0x74">
 				<name>SourceToConnector</name>
 				<regnode name="autorouterPref" isopaque="yes">
 					<value>Nw</value>
@@ -2374,10 +2456,10 @@ Minimum</value>
 				<attribute kind="srcRolename" status="meta">
 					<value>src</value>
 				</attribute>
-				<connpoint role="src" target="id-0066-00000017"/>
-				<connpoint role="dst" target="id-0066-00000019"/>
+				<connpoint role="src" target="id-0066-00000013"/>
+				<connpoint role="dst" target="id-0066-00000015"/>
 			</connection>
-			<connection id="id-0068-0000002b" kind="ConnectorToDestination" role="ConnectorToDestination" guid="{7c054b18-46b1-44b4-9e59-ef0b81d70234}" relid="0x75">
+			<connection id="id-0068-0000001a" kind="ConnectorToDestination" role="ConnectorToDestination" guid="{7c054b18-46b1-44b4-9e59-ef0b81d70234}" relid="0x75">
 				<name>ConnectorToDestination</name>
 				<regnode name="autorouterPref" isopaque="yes">
 					<value>Se</value>
@@ -2388,24 +2470,32 @@ Minimum</value>
 				<attribute kind="dstRolename" status="meta">
 					<value>dst</value>
 				</attribute>
-				<connpoint role="dst" target="id-0066-00000017"/>
-				<connpoint role="src" target="id-0066-00000019"/>
+				<connpoint role="dst" target="id-0066-00000013"/>
+				<connpoint role="src" target="id-0066-00000015"/>
 			</connection>
-			<connection id="id-0068-0000002f" kind="AssociationClass" role="AssociationClass" guid="{4c2f2f82-93b5-4faf-828e-347be02b4a91}" relid="0x79">
+			<connection id="id-0068-0000001b" kind="AssociationClass" role="AssociationClass" guid="{4c2f2f82-93b5-4faf-828e-347be02b4a91}" relid="0x79">
 				<name>AssociationClass</name>
 				<regnode name="autorouterPref" isopaque="yes">
 					<value>En</value>
 				</regnode>
 				<connpoint role="dst" target="id-0066-00000004"/>
-				<connpoint role="src" target="id-0066-00000019"/>
+				<connpoint role="src" target="id-0066-00000015"/>
 			</connection>
-			<connection id="id-0068-00000030" kind="HasConstraint" role="HasConstraint" guid="{74b7e541-41c3-46f0-b792-2701fb358d97}" relid="0x7b">
+			<connection id="id-0068-0000001c" kind="HasConstraint" role="HasConstraint" guid="{74b7e541-41c3-46f0-b792-2701fb358d97}" relid="0x7b">
 				<name>HasConstraint</name>
 				<regnode name="autorouterPref" isopaque="yes">
 					<value>Ne</value>
 				</regnode>
 				<connpoint role="dst" target="id-0066-0000000f"/>
-				<connpoint role="src" target="id-0066-0000001a"/>
+				<connpoint role="src" target="id-0066-00000016"/>
+			</connection>
+			<connection id="id-0068-0000001d" kind="HasConstraint" role="HasConstraint" guid="{1656b632-1aa1-4956-a0ae-7ecf716f6772}" relid="0x7d">
+				<name>HasConstraint</name>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>Ne</value>
+				</regnode>
+				<connpoint role="dst" target="id-0066-0000000b"/>
+				<connpoint role="src" target="id-0066-00000017"/>
 			</connection>
 			<set id="id-0069-00000001" kind="Aspect" role="Aspect" guid="{576df619-7847-483e-84a2-f89eb9db1c8d}" relid="0x6" members="id-0066-00000001 id-0066-00000002 id-0066-00000004 id-0066-00000005 id-0066-00000006 id-0066-00000009 id-0066-0000000a id-0066-0000000b">
 				<name>Main</name>
