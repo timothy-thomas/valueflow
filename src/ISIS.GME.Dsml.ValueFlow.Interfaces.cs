@@ -15,9 +15,9 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 	/// <summary>
 	///<para>This API code is compatible with the following paradigm:</para>
 	///<para> - Name: ValueFlow</para>
-	///<para> - Guid: {753F4D21-47FF-4667-B1C3-F5746EC12116}</para>
+	///<para> - Guid: {835D4947-BD89-414F-BC85-8AEFDE99C4C1}</para>
 	///<para>Additional information: </para>
-	///<para> - Date: 1/4/2017 12:56:54 PM</para>
+	///<para> - Date: 1/4/17 1:16:31 PM</para>
 	///<para> - Author: </para>
 	///<para> - Version: </para>
 	///<para> - Comment: </para>
@@ -79,6 +79,424 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para></para>
 		///</summary>
 		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Base> AllChildren
+		{
+			get;
+		}
+	}
+	
+	/// <summary>
+	/// <para>Parameter interface</para>
+	/// <para>-----------------------------------------------</para>
+	/// <para>Base types:</para>
+	/// <para>- NamedElement</para>
+	/// <para>- ValueFlowElement</para>
+	/// </summary>
+	public interface Parameter : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
+	{
+		
+		/// <summary>
+		///<para>Contains the domain specific source end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.SrcConnectionsClass SrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific destination end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.DstConnectionsClass DstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter ArcheType
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.AttributesClass Attributes
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.ReferencedByClass ReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.MembersOfSetClass MembersOfSet
+		{
+			get;
+		}
+	}
+	
+	/// <summary>
+	/// <para>ComplexFormula interface</para>
+	/// <para>-----------------------------------------------</para>
+	/// <para>Base types:</para>
+	/// <para>- FormulaAtom</para>
+	/// <para>- ValueFlowElement</para>
+	/// </summary>
+	public interface ComplexFormula : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
+	{
+		
+		/// <summary>
+		///<para>Contains the domain specific source end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.SrcConnectionsClass SrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific destination end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.DstConnectionsClass DstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Interfaces.ComplexFormula ArcheType
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.AttributesClass Attributes
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.ReferencedByClass ReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.MembersOfSetClass MembersOfSet
+		{
+			get;
+		}
+	}
+	
+	/// <summary>
+	/// <para>Component interface</para>
+	/// </summary>
+	public interface Component : ISIS.GME.Common.Interfaces.Model
+	{
+		
+		/// <summary>
+		///<para>Contains the domain specific source end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.Component.SrcConnectionsClass SrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific destination end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.Component.DstConnectionsClass DstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Interfaces.Component ArcheType
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.Component.AttributesClass Attributes
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific child objects.</para>
+		///<para></para>
+		///</summary>
+		Classes.Component.ChildrenClass Children
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains all the domain specific child objects.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Base> AllChildren
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.Component.ReferencedByClass ReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		ISIS.GME.Dsml.ValueFlow.Classes.Component.MembersOfSetClass MembersOfSet
+		{
+			get;
+		}
+	}
+	
+	/// <summary>
+	/// <para>SimpleFormula interface</para>
+	/// <para>-----------------------------------------------</para>
+	/// <para>Base types:</para>
+	/// <para>- FormulaAtom</para>
+	/// <para>- ValueFlowElement</para>
+	/// </summary>
+	public interface SimpleFormula : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
+	{
+		
+		/// <summary>
+		///<para>Contains the domain specific source end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.SrcConnectionsClass SrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific destination end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.DstConnectionsClass DstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Interfaces.SimpleFormula ArcheType
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.AttributesClass Attributes
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.ReferencedByClass ReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.MembersOfSetClass MembersOfSet
 		{
 			get;
 		}
@@ -218,13 +636,13 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 	}
 	
 	/// <summary>
-	/// <para>Parameter interface</para>
+	/// <para>Output interface</para>
 	/// <para>-----------------------------------------------</para>
 	/// <para>Base types:</para>
 	/// <para>- NamedElement</para>
 	/// <para>- ValueFlowElement</para>
 	/// </summary>
-	public interface Parameter : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
+	public interface Output : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
 	{
 		
 		/// <summary>
@@ -240,7 +658,7 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
 		///<para></para>
 		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.SrcConnectionsClass SrcConnections
+		new ISIS.GME.Dsml.ValueFlow.Classes.Output.SrcConnectionsClass SrcConnections
 		{
 			get;
 		}
@@ -258,7 +676,7 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
 		///<para></para>
 		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.DstConnectionsClass DstConnections
+		new ISIS.GME.Dsml.ValueFlow.Classes.Output.DstConnectionsClass DstConnections
 		{
 			get;
 		}
@@ -267,7 +685,7 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
 		///<para> NULL if the object is not derived.</para>
 		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Interfaces.Parameter ArcheType
+		new ISIS.GME.Dsml.ValueFlow.Interfaces.Output ArcheType
 		{
 			get;
 		}
@@ -276,7 +694,7 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para>Contains the domain specific attributes.</para>
 		///<para></para>
 		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.AttributesClass Attributes
+		new ISIS.GME.Dsml.ValueFlow.Classes.Output.AttributesClass Attributes
 		{
 			get;
 		}
@@ -294,7 +712,7 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para></para>
 		///<para></para>
 		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.ReferencedByClass ReferencedBy
+		new ISIS.GME.Dsml.ValueFlow.Classes.Output.ReferencedByClass ReferencedBy
 		{
 			get;
 		}
@@ -312,122 +730,7 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para></para>
 		///<para></para>
 		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Parameter.MembersOfSetClass MembersOfSet
-		{
-			get;
-		}
-	}
-	
-	/// <summary>
-	/// <para>Component interface</para>
-	/// </summary>
-	public interface Component : ISIS.GME.Common.Interfaces.Model
-	{
-		
-		/// <summary>
-		///<para>Contains the domain specific source end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
-		///<para></para>
-		///</summary>
-		ISIS.GME.Dsml.ValueFlow.Classes.Component.SrcConnectionsClass SrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific destination end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
-		///<para></para>
-		///</summary>
-		ISIS.GME.Dsml.ValueFlow.Classes.Component.DstConnectionsClass DstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
-		///<para> NULL if the object is not derived.</para>
-		///</summary>
-		ISIS.GME.Dsml.ValueFlow.Interfaces.Component ArcheType
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific attributes.</para>
-		///<para></para>
-		///</summary>
-		ISIS.GME.Dsml.ValueFlow.Classes.Component.AttributesClass Attributes
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific child objects.</para>
-		///<para></para>
-		///</summary>
-		Classes.Component.ChildrenClass Children
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains all the domain specific child objects.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Base> AllChildren
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		ISIS.GME.Dsml.ValueFlow.Classes.Component.ReferencedByClass ReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		ISIS.GME.Dsml.ValueFlow.Classes.Component.MembersOfSetClass MembersOfSet
+		new ISIS.GME.Dsml.ValueFlow.Classes.Output.MembersOfSetClass MembersOfSet
 		{
 			get;
 		}
@@ -534,208 +837,6 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 	}
 	
 	/// <summary>
-	/// <para>Output interface</para>
-	/// <para>-----------------------------------------------</para>
-	/// <para>Base types:</para>
-	/// <para>- NamedElement</para>
-	/// <para>- ValueFlowElement</para>
-	/// </summary>
-	public interface Output : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
-	{
-		
-		/// <summary>
-		///<para>Contains the domain specific source end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Output.SrcConnectionsClass SrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific destination end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Output.DstConnectionsClass DstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
-		///<para> NULL if the object is not derived.</para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Interfaces.Output ArcheType
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific attributes.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Output.AttributesClass Attributes
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Output.ReferencedByClass ReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Output.MembersOfSetClass MembersOfSet
-		{
-			get;
-		}
-	}
-	
-	/// <summary>
-	/// <para>Input interface</para>
-	/// <para>-----------------------------------------------</para>
-	/// <para>Base types:</para>
-	/// <para>- NamedElement</para>
-	/// <para>- ValueFlowElement</para>
-	/// </summary>
-	public interface Input : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
-	{
-		
-		/// <summary>
-		///<para>Contains the domain specific source end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Input.SrcConnectionsClass SrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific destination end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Input.DstConnectionsClass DstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
-		///<para> NULL if the object is not derived.</para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Interfaces.Input ArcheType
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific attributes.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Input.AttributesClass Attributes
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Input.ReferencedByClass ReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.Input.MembersOfSetClass MembersOfSet
-		{
-			get;
-		}
-	}
-	
-	/// <summary>
 	/// <para>NamedElement interface</para>
 	/// <para>-----------------------------------------------</para>
 	/// <para>Base types:</para>
@@ -830,208 +931,6 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para></para>
 		///</summary>
 		new ISIS.GME.Dsml.ValueFlow.Classes.NamedElement.MembersOfSetClass MembersOfSet
-		{
-			get;
-		}
-	}
-	
-	/// <summary>
-	/// <para>SimpleFormula interface</para>
-	/// <para>-----------------------------------------------</para>
-	/// <para>Base types:</para>
-	/// <para>- FormulaAtom</para>
-	/// <para>- ValueFlowElement</para>
-	/// </summary>
-	public interface SimpleFormula : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
-	{
-		
-		/// <summary>
-		///<para>Contains the domain specific source end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.SrcConnectionsClass SrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific destination end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.DstConnectionsClass DstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
-		///<para> NULL if the object is not derived.</para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Interfaces.SimpleFormula ArcheType
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific attributes.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.AttributesClass Attributes
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.ReferencedByClass ReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.SimpleFormula.MembersOfSetClass MembersOfSet
-		{
-			get;
-		}
-	}
-	
-	/// <summary>
-	/// <para>ComplexFormula interface</para>
-	/// <para>-----------------------------------------------</para>
-	/// <para>Base types:</para>
-	/// <para>- FormulaAtom</para>
-	/// <para>- ValueFlowElement</para>
-	/// </summary>
-	public interface ComplexFormula : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.FormulaAtom, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
-	{
-		
-		/// <summary>
-		///<para>Contains the domain specific source end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.SrcConnectionsClass SrcConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific destination end point of this connection.</para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.DstConnectionsClass DstConnections
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
-		///<para> NULL if the object is not derived.</para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Interfaces.ComplexFormula ArcheType
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para>Contains the domain specific attributes.</para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.AttributesClass Attributes
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.ReferencedByClass ReferencedBy
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
-		{
-			get;
-		}
-		
-		/// <summary>
-		///<para></para>
-		///<para></para>
-		///</summary>
-		new ISIS.GME.Dsml.ValueFlow.Classes.ComplexFormula.MembersOfSetClass MembersOfSet
 		{
 			get;
 		}
@@ -1147,6 +1046,107 @@ namespace ISIS.GME.Dsml.ValueFlow.Interfaces
 		///<para></para>
 		///</summary>
 		ISIS.GME.Dsml.ValueFlow.Classes.Python.MembersOfSetClass MembersOfSet
+		{
+			get;
+		}
+	}
+	
+	/// <summary>
+	/// <para>Input interface</para>
+	/// <para>-----------------------------------------------</para>
+	/// <para>Base types:</para>
+	/// <para>- NamedElement</para>
+	/// <para>- ValueFlowElement</para>
+	/// </summary>
+	public interface Input : ISIS.GME.Common.Interfaces.Atom, ISIS.GME.Dsml.ValueFlow.Interfaces.NamedElement, ISIS.GME.Dsml.ValueFlow.Interfaces.ValueFlowElement
+	{
+		
+		/// <summary>
+		///<para>Contains the domain specific source end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllSrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a DESTINATION.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Input.SrcConnectionsClass SrcConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific destination end point of this connection.</para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.Connection> AllDstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Retrieves all connections, which have this object as a SOURCE.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Input.DstConnectionsClass DstConnections
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>the object that is at the farthest position within the chain of base objects (i.e. the one which is not derived from anything).</para>
+		///<para> NULL if the object is not derived.</para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Interfaces.Input ArcheType
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para>Contains the domain specific attributes.</para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Input.AttributesClass Attributes
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Input.ReferencedByClass ReferencedBy
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new global::System.Collections.Generic.IEnumerable<ISIS.GME.Common.Interfaces.FCO> AllMembersOfSet
+		{
+			get;
+		}
+		
+		/// <summary>
+		///<para></para>
+		///<para></para>
+		///</summary>
+		new ISIS.GME.Dsml.ValueFlow.Classes.Input.MembersOfSetClass MembersOfSet
 		{
 			get;
 		}

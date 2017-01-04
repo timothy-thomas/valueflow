@@ -10,10 +10,11 @@ using Xunit;
 using ValueFlow = ISIS.GME.Dsml.ValueFlow.Interfaces;
 using ValueFlowClasses = ISIS.GME.Dsml.ValueFlow.Classes;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace ValueFlowInterpreterTest
 {
-    public class Tests : IClassFixture<VFTestFixture>
+    public class Tests : IUseFixture<VFTestFixture>
     {
         [Fact]
         public void TestTest()
@@ -38,6 +39,10 @@ namespace ValueFlowInterpreterTest
                     .Cast<MgaFCO>()
                     .Select(x => ValueFlowClasses.Component.Cast(x))
                     .Cast<ValueFlow.Component>();
+
+                var rtn_count = rtn.Count();
+                var rtn_first = rtn.First();
+                var rtn_first_fco = rtn_first.Impl;
 
                 Console.Out.Write(rtn.ToString());
 
@@ -87,6 +92,11 @@ namespace ValueFlowInterpreterTest
             mgaGateway.PerformInTransaction(del, abort: false);
         }
 
+        public void SetFixture(VFTestFixture data)
+        {
+            this.fixture = data;
+        }
+
         private MgaProject proj
         {
             get
@@ -95,12 +105,12 @@ namespace ValueFlowInterpreterTest
             }
         }
 
-        public Tests(VFTestFixture fixture)
+        public Tests()
         {
-            this.fixture = fixture;
         }
         VFTestFixture fixture;
     }
+
     public class VFTestFixture : IDisposable
     {
         public String xmePath = Path.Combine("..", "..", "..", "..",
@@ -129,4 +139,19 @@ namespace ValueFlowInterpreterTest
             proj.Close();
         }
     }
+
+    public class MainClass
+    {
+        [STAThread]
+        public static int Main(string[] args)
+        {
+            int ret = Xunit.ConsoleClient.Program.Main(new string[] {
+                Assembly.GetAssembly(typeof(Tests)).CodeBase.Substring("file:///".Length),
+                //"/noshadow",
+            });
+            Console.In.ReadLine();
+            return ret;
+        }
+    }
+
 }
