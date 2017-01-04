@@ -55,7 +55,7 @@ namespace ValueFlowInterpreter
         {
             public string name;
             public System.Guid guid;
-            public bool known;
+            public bool constant;
             public string value;
             public List<System.Guid> dependencies;
         }
@@ -66,7 +66,7 @@ namespace ValueFlowInterpreter
             {
                 name = nm;
                 guid = id;
-                known = true;
+                constant = true;
                 value = val;
             }
 
@@ -74,7 +74,7 @@ namespace ValueFlowInterpreter
             {
                 name = nm;
                 guid = id;
-                known = false;
+                constant = false;
                 dependencies = new List<System.Guid> { dep };
             }
         }
@@ -96,7 +96,7 @@ namespace ValueFlowInterpreter
 
             public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string simTy)
             {
-                known = false;
+                constant = false;
                 name = nm;
                 guid = id;
                 dependencies = deps;
@@ -116,7 +116,7 @@ namespace ValueFlowInterpreter
 
             public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, Dictionary<System.Guid, string> cm, String bd)
             {
-                known = false;
+                constant = false;
                 name = nm;
                 guid = id;
                 dependencies = deps;
@@ -127,7 +127,7 @@ namespace ValueFlowInterpreter
 
             public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string fn, List<System.Guid> op)
             {
-                known = false;
+                constant = false;
                 name = nm;
                 guid = id;
                 type = ty;
@@ -142,10 +142,6 @@ namespace ValueFlowInterpreter
             components.Add(parents + component.Name);
             parents = parents + component.Name + ".";
             foreach (var p in component.Children.ParameterCollection) {
-                var incoming = p.SrcConnections.ValueFlowCollection.Count();
-                var outgoing = p.DstConnections.ValueFlowCollection.Count();
-                var incoming2 = p.AllDstConnections.Any();
-                var outgoing2 = p.AllSrcConnections.Any();
                 if (!p.SrcConnections.ValueFlowCollection.Any()) // No incoming ValueFlow connections
                 {
                     // Value is Constant
@@ -260,13 +256,13 @@ namespace ValueFlowInterpreter
                 var components = new List<string>();
 
                 // constants and function references list
-                var assignmentLines = new List<Parameter>();
+                var parameters = new List<Parameter>();
 
                 // functions
                 var functions = new List<Function>();
 
                 // Build the list of all constants and functions
-                BuildLists("", dsCurrentObj, components, assignmentLines, functions);
+                BuildLists("", dsCurrentObj, components, parameters, functions);
 
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"output.py"))
                 {
@@ -306,39 +302,28 @@ namespace ValueFlowInterpreter
                     while (count > lastCount)
                     {
                         lastCount = count;
-                        foreach (var l in assignmentLines.Where(x => !knownElements.Contains(x.guid)))
+                        foreach (var p in parameters.Where(p => !knownElements.Contains(p.guid)))
                         {
-                            if (l.known & !knownElements.Contains(l.guid))
+                            if (p.constant)
                             {
-                                knownElements.Add(l.guid);
-                                values.Add(l.guid, "parameters[\"" + l.name.Replace(".", "\"][\"") + "\"]");
-                                file.WriteLine("parameters[\"" + l.name.Replace(".", "\"][\"") + "\"] = " + l.value);
+                                knownElements.Add(p.guid);
+                                values.Add(p.guid, "parameters[\"" + p.name.Replace(".", "\"][\"") + "\"]");
+                                file.WriteLine("parameters[\"" + p.name.Replace(".", "\"][\"") + "\"] = " + p.value);
                                 count++;
                             }
-                            else if (!knownElements.Contains(l.guid))
+                            else if (knownElements.Contains(p.dependencies.First()))
                             {
-                                if (knownElements.Contains(l.dependencies.First()))
-                                {
-                                    knownElements.Add(l.guid);
-                                    values.Add(l.guid, values[l.dependencies.First()]);
-                                    file.WriteLine("parameters[\"" + l.name.Replace(".", "\"][\"") + "\"] = " + values[l.dependencies.First()]);
-                                    count++;
-                                }
+                                knownElements.Add(p.guid);
+                                values.Add(p.guid, values[p.dependencies.First()]);
+                                file.WriteLine("parameters[\"" + p.name.Replace(".", "\"][\"") + "\"] = " + values[p.dependencies.First()]);
+                                count++;
                             }
                         }
 
-                        foreach (var f in functions.Where(x => !knownElements.Contains(x.guid)))
+                        foreach (var f in functions.Where(f => !knownElements.Contains(f.guid)))
                         {
-                            var allDepsSatisfied = true;
-                            foreach (var dep in f.dependencies)
-                            {
-                                if (!knownElements.Contains(dep))
-                                {
-                                    allDepsSatisfied = false;
-                                    break;
-                                }
-                            }
-                            if (allDepsSatisfied)
+                            var unsatisfiedDeps = f.dependencies.Where(d => !knownElements.Contains(d));
+                            if (!unsatisfiedDeps.Any())
                             {
                                 if (f.type == Function.FunctionType.SIMPLE)
                                 {
@@ -357,15 +342,10 @@ namespace ValueFlowInterpreter
                                     var output = new StringBuilder(f.body);
                                     foreach (var kvp in valueMapping)
                                         output.Replace(kvp.Key, kvp.Value);
-                                    var valueString = output.ToString();
-                                    // Objective: Only Allow final Order of Operations Operator to be a unary operator, i.e. not "5+7" or "5/7", but "(5+7)", "(5/7)", or "max(5,7)"
-                                    // TODO: Fix false positive when fed "max(2,3)+max(3,5)" which still need to be wrapped
-                                    //if (!Regex.IsMatch(valueString, @"^[a-zA-Z]*\(.*\)$"))
-                                    //{
-                                    //    valueString = "(" + valueString + ")";
-                                    //}
-                                    // Instead, just wrap every answer in a pair of parentheses
-                                    valueString = "(" + valueString + ")";
+                                    var valueString = "(" + output.ToString() + ")";
+                                    
+                                    // TODO: add translator from MuParser to Python
+                                    
                                     knownElements.Add(f.guid);
                                     values.Add(f.guid, valueString);
                                     count++;
@@ -373,10 +353,10 @@ namespace ValueFlowInterpreter
                                 else if (f.type == Function.FunctionType.PYTHON)
                                 {
                                     var functionName = Path.GetFileNameWithoutExtension(f.python_filename);
-                                    file.WriteLine("import " + functionName);
+                                    file.WriteLine("\nimport " + functionName);
                                     file.WriteLine("pythonResults.append("+ functionName + "." + functionName + "(");
                                     file.Write("    " + String.Join(",\n    ",f.dependencies.Select(x => values[x]).ToList()));
-                                    file.WriteLine("))");
+                                    file.WriteLine("))\n");
                                     int i = 0;
                                     foreach (var output in f.outputs)
                                     {
