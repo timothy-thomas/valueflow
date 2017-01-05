@@ -122,6 +122,16 @@ namespace ValueFlowInterpreterTest
             Assert.True((int)result["SimpleExample"]["SimpleContainer"]["Volume"] == 2860);
         }
 
+        [Fact]
+        public void AliasExample()
+        {
+            var result = RunComponent("AliasExample");
+            Assert.Equal(10, (int)result["AliasExample"]["P1"]);
+            Assert.Equal(2, (int)result["AliasExample"]["P2"]);
+
+            Assert.Equal(8, (int)result["AliasExample"]["output"]);
+        }
+
         private JObject RunComponent(string component_name)
         {
             if (File.Exists("output.py"))
@@ -178,6 +188,9 @@ namespace ValueFlowInterpreterTest
 
             process.Start();
             process.WaitForExit();
+
+            Assert.True(0 == process.ExitCode, "Python script failed");
+
             return process.StandardOutput.ReadToEnd();
         }
 
