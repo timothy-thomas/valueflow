@@ -122,6 +122,52 @@ namespace ValueFlowInterpreterTest
             Assert.True((int)result["SimpleExample"]["SimpleContainer"]["Volume"] == 2860);
         }
 
+        [Fact]
+        public void AliasExample()
+        {
+            var result = RunComponent("AliasExample");
+            Assert.Equal(10, (int)result["AliasExample"]["P1"]);
+            Assert.Equal(2, (int)result["AliasExample"]["P2"]);
+
+            Assert.Equal(8, (int)result["AliasExample"]["output"]);
+        }
+
+        [Fact]
+        public void FractionExample()
+        {
+            var result = RunComponent("FractionExample");
+            Assert.Equal(0.25, result["FractionExample"]["P_Frac"]);
+            Assert.Equal(1.25, result["FractionExample"]["P_Decimal"]);
+
+            Assert.Equal(1.5, result["FractionExample"]["SimpleOutput"]);
+            Assert.Equal((1 / 4) / 1.25, result["FractionExample"]["ComplexOutput"]);
+        }
+
+        [Fact]
+        // OpenMETA's FormulaEvalutor assumes that empty Parameter fields have value 0.
+        public void EmptyInputFormula()
+        {
+            var result = RunComponent("EmptyInputFormula");
+            Assert.Equal(5, (int)result["EmptyInputFormula"]["P_5"]);
+            Assert.Equal(0, (int)result["EmptyInputFormula"]["P_Empty"]);
+
+            Assert.Equal(5, (int)result["EmptyInputFormula"]["output"]);
+        }        
+
+        [Fact]
+        // OpenMETA's FormulaEvalutor assumes that empty Parameter fields have value 0.
+        public void AliasExample2()
+        {
+            var result = RunComponent("AliasExample2");
+
+            Assert.Equal(10, (int)result["AliasExample"]["P1"]);
+            Assert.Equal(2, (int)result["AliasExample"]["P2"]);
+            Assert.Equal(-12, (int)result["AliasExample2"]["P12"]);
+            Assert.Equal(-21, (int)result["AliasExample2"]["P21"]);
+
+            Assert.Equal(-33, (int)result["AliasExample2"]["output"]);
+        }
+
         private JObject RunComponent(string component_name)
         {
             if (File.Exists("output.py"))
@@ -178,6 +224,9 @@ namespace ValueFlowInterpreterTest
 
             process.Start();
             process.WaitForExit();
+
+            Assert.True(0 == process.ExitCode, "Python script failed");
+
             return process.StandardOutput.ReadToEnd();
         }
 

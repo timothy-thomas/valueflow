@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project SYSTEM "mga.dtd">
 
-<project guid="{835D4947-BD89-414F-BC85-8AEFDE99C4C1}" cdate="Tue Jan 03 10:10:10 2017" mdate="Tue Jan 03 10:10:10 2017" version="" metaguid="{C84D2738-4519-44F2-B4C1-114F73567576}" metaversion="" metaname="MetaGME">
+<project guid="{1B975C43-09F5-46F7-AD70-CDEB9714B8E8}" cdate="Thu Jan 05 15:12:10 2017" mdate="Thu Jan 05 15:12:10 2017" version="" metaguid="{C84D2738-4519-44F2-B4C1-114F73567576}" metaversion="" metaname="MetaGME">
 	<name>ValueFlow</name>
 	<comment></comment>
 	<author></author>
@@ -755,8 +755,8 @@
 				<attribute kind="IsAutoRouted" status="meta">
 					<value>true</value>
 				</attribute>
-				<attribute kind="LabelFormatStr" status="meta">
-					<value></value>
+				<attribute kind="LabelFormatStr">
+					<value>%Name%</value>
 				</attribute>
 				<attribute kind="NamePosition" status="meta">
 					<value>4</value>
