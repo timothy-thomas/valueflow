@@ -152,6 +152,20 @@ namespace ValueFlowInterpreterTest
             Assert.Equal(0, (int)result["EmptyInputFormula"]["P_Empty"]);
 
             Assert.Equal(5, (int)result["EmptyInputFormula"]["output"]);
+        }        
+
+        [Fact]
+        // OpenMETA's FormulaEvalutor assumes that empty Parameter fields have value 0.
+        public void AliasExample2()
+        {
+            var result = RunComponent("AliasExample2");
+
+            Assert.Equal(10, (int)result["AliasExample"]["P1"]);
+            Assert.Equal(2, (int)result["AliasExample"]["P2"]);
+            Assert.Equal(-12, (int)result["AliasExample2"]["P12"]);
+            Assert.Equal(-21, (int)result["AliasExample2"]["P21"]);
+
+            Assert.Equal(-33, (int)result["AliasExample2"]["output"]);
         }
 
         private JObject RunComponent(string component_name)

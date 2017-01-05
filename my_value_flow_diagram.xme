@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project SYSTEM "mga.dtd">
 
-<project guid="{6C6C3388-61BF-4EC9-9F6C-5C25660A28BA}" cdate="Thu Jan 05 15:45:25 2017" mdate="Thu Jan 05 15:45:25 2017" version="" metaguid="{5E3EB390-FD4D-49D6-A767-220AB8051A58}" metaversion="" metaname="ValueFlow">
+<project guid="{DDC1F930-B7F2-412F-A46E-AC1F0FFB8A9B}" cdate="Thu Jan 05 15:45:25 2017" mdate="Thu Jan 05 15:45:25 2017" version="" metaguid="{5E3EB390-FD4D-49D6-A767-220AB8051A58}" metaversion="" metaname="ValueFlow">
 	<name>RootFolder</name>
 	<comment></comment>
 	<author></author>
-	<folder id="id-006a-00000001" relid="0x1" childrelidcntr="0x9" kind="RootFolder" guid="{d3b2c389-3ae0-468c-87d0-dfc37471fca9}">
+	<folder id="id-006a-00000001" relid="0x1" childrelidcntr="0xa" kind="RootFolder" guid="{d3b2c389-3ae0-468c-87d0-dfc37471fca9}">
 		<name>RootFolder</name>
 		<regnode name="ConstraintManagerSettings" status="undefined">
 			<value></value>
@@ -2417,7 +2417,7 @@
 				<connpoint role="src" target="id-0066-00000061"/>
 			</connection>
 		</model>
-		<model id="id-0065-00000011" kind="Component" guid="{2e026b94-8036-40f4-8ae9-b02e0c6961cb}" relid="0x7" childrelidcntr="0x8">
+		<model id="id-0065-00000011" kind="Component" guid="{2e026b94-8036-40f4-8ae9-b02e0c6961cb}" relid="0x7" childrelidcntr="0x12">
 			<name>AliasExample</name>
 			<atom id="id-0066-00000064" kind="Parameter" role="Parameter" guid="{13ea529a-ef87-49ac-bf1c-f02bd132ec9f}" relid="0x1">
 				<name>P1</name>
@@ -2766,6 +2766,148 @@
 				</attribute>
 				<connpoint role="src" target="id-0066-00000070"/>
 				<connpoint role="dst" target="id-0066-00000071"/>
+			</connection>
+		</model>
+		<model id="id-0065-00000014" kind="Component" guid="{411353fb-a272-410c-9a6c-8cc2150a8cd0}" relid="0xa" childrelidcntr="0x12">
+			<name>AliasExample2</name>
+			<atom id="id-0066-00000078" kind="Parameter" role="Parameter" guid="{7d232d3a-f9b0-4a46-9859-37a042410530}" relid="0xe">
+				<name>Output</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>455,252</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Value" status="meta">
+					<value></value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-00000079" kind="ComplexFormula" role="ComplexFormula" guid="{d91d29fb-1fb5-40b9-9f06-00b5795e2c51}" relid="0xb">
+				<name>ComplexFormula</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>287,252</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Expression">
+					<value>P12 + P21</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007a" kind="Parameter" role="Parameter" guid="{986d779d-2070-40b2-9d07-d43609abbc63}" relid="0x3">
+				<name>P2</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>98,140</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Value">
+					<value>2</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007b" kind="Parameter" role="Parameter" guid="{9207399e-0ec8-4c1a-8cd0-9ae1edd18831}" relid="0x1">
+				<name>P1</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>98,70</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Value">
+					<value>10</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007c" kind="Parameter" role="Parameter" guid="{19c351f4-8a81-472c-a94b-5d37be923e3e}" relid="0xa">
+				<name>P21</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>98,322</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Value">
+					<value>-21</value>
+				</attribute>
+			</atom>
+			<atom id="id-0066-0000007d" kind="Parameter" role="Parameter" guid="{3a978755-352b-42d6-a01b-81cef170260a}" relid="0x9">
+				<name>P12</name>
+				<regnode name="PartRegs" status="undefined">
+					<value></value>
+					<regnode name="Main" status="undefined">
+						<value></value>
+						<regnode name="Position" isopaque="yes">
+							<value>98,252</value>
+						</regnode>
+					</regnode>
+				</regnode>
+				<attribute kind="Value">
+					<value>-12</value>
+				</attribute>
+			</atom>
+			<connection id="id-0068-00000066" kind="ValueFlow" role="ValueFlow" guid="{694d99eb-e891-403b-8dee-8d69a8bdc2cd}" relid="0xc">
+				<name>ValueFlow</name>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>E</value>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000079"/>
+				<connpoint role="src" target="id-0066-0000007d"/>
+			</connection>
+			<connection id="id-0068-00000067" kind="ValueFlow" role="ValueFlow" guid="{2daba957-ee5c-4f17-98c5-f42c114664b0}" relid="0xd">
+				<name>ValueFlow</name>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>Ew</value>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000079"/>
+				<connpoint role="src" target="id-0066-0000007c"/>
+			</connection>
+			<connection id="id-0068-00000068" kind="ValueFlow" role="ValueFlow" guid="{5e93cf5c-7369-4adc-8370-f41dbfa71784}" relid="0xf">
+				<name>ValueFlow</name>
+				<regnode name="autorouterPref" isopaque="yes">
+					<value>Ew</value>
+				</regnode>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000078"/>
+				<connpoint role="src" target="id-0066-00000079"/>
+			</connection>
+			<connection id="id-0068-00000069" kind="ValueFlow" role="ValueFlow" guid="{97cc3d74-fa2f-4692-95ee-dfe1b8226d8a}" relid="0x10">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000079"/>
+				<connpoint role="src" target="id-0066-0000007b"/>
+			</connection>
+			<connection id="id-0068-0000006a" kind="ValueFlow" role="ValueFlow" guid="{134e4f60-7534-4bee-b13f-ec63fcf3378a}" relid="0x12">
+				<name>ValueFlow</name>
+				<attribute kind="Name" status="meta">
+					<value></value>
+				</attribute>
+				<connpoint role="dst" target="id-0066-00000079"/>
+				<connpoint role="src" target="id-0066-0000007a"/>
 			</connection>
 		</model>
 	</folder>
