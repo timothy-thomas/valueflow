@@ -12,6 +12,9 @@ using GME.MGA.Core;
 using VF = ISIS.GME.Dsml.ValueFlow.Interfaces;
 using VFClasses = ISIS.GME.Dsml.ValueFlow.Classes;
 using System.Windows.Forms;
+using Antlr4.Runtime;
+using Antlr4.Runtime.Misc;
+using Antlr4.Runtime.Tree;
 
 using System.Collections;
 
@@ -339,13 +342,22 @@ namespace ValueFlowInterpreter
                                     {
                                         valueMapping[f.complexMapping[dep]] = values[dep];
                                     }
-                                    var output = new StringBuilder(f.body);
+                                    
+                                    // Translate the MuParser expression to a python expression
+                                    AntlrInputStream input = new AntlrInputStream(f.body);
+                                    MuParserLexer lexer = new MuParserLexer(input);
+                                    CommonTokenStream tokens = new CommonTokenStream(lexer);
+                                    MuParserParser parser = new MuParserParser(tokens);
+                                    IParseTree tree = parser.expr();
+                                    MuParserToPythonVisitor visitor = new MuParserToPythonVisitor();
+                                    var body = visitor.Visit(tree);
+
+                                    // Replace the META variables with their respective Python variables
+                                    var output = new StringBuilder(body);
                                     foreach (var kvp in valueMapping)
                                         output.Replace(kvp.Key, kvp.Value);
                                     var valueString = "(" + output.ToString() + ")";
-                                    
-                                    // TODO: add translator from MuParser to Python
-                                    
+
                                     knownElements.Add(f.guid);
                                     values.Add(f.guid, valueString);
                                     count++;
