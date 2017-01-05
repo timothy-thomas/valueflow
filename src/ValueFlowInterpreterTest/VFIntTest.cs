@@ -132,6 +132,28 @@ namespace ValueFlowInterpreterTest
             Assert.Equal(8, (int)result["AliasExample"]["output"]);
         }
 
+        [Fact]
+        public void FractionExample()
+        {
+            var result = RunComponent("FractionExample");
+            Assert.Equal(0.25, result["FractionExample"]["P_Frac"]);
+            Assert.Equal(1.25, result["FractionExample"]["P_Decimal"]);
+
+            Assert.Equal(1.5, result["FractionExample"]["SimpleOutput"]);
+            Assert.Equal((1 / 4) / 1.25, result["FractionExample"]["ComplexOutput"]);
+        }
+
+        [Fact]
+        // OpenMETA's FormulaEvalutor assumes that empty Parameter fields have value 0.
+        public void EmptyInputFormula()
+        {
+            var result = RunComponent("EmptyInputFormula");
+            Assert.Equal(5, (int)result["EmptyInputFormula"]["P_5"]);
+            Assert.Equal(0, (int)result["EmptyInputFormula"]["P_Empty"]);
+
+            Assert.Equal(5, (int)result["EmptyInputFormula"]["output"]);
+        }
+
         private JObject RunComponent(string component_name)
         {
             if (File.Exists("output.py"))
