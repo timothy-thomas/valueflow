@@ -337,11 +337,12 @@ namespace ValueFlowInterpreter
                     }
 
                     var knownElements = new List<System.Guid>();
+                    var newKnownElements = new List<System.Guid>();
                     var values = new Dictionary<System.Guid, string>();
                     int simpleResultsCount = 0;
                     int complexResultsCount = 0;
                     int pythonResultsCount = 0;
-                    int passIndex = 1;
+                    int passIndex = 0;
 
                     int lastCount = -1;
                     int count = 0;
@@ -353,14 +354,14 @@ namespace ValueFlowInterpreter
                         {
                             if (p.constant)
                             {
-                                knownElements.Add(p.guid);
+                                newKnownElements.Add(p.guid);
                                 values.Add(p.guid, "parameters[\"" + p.name.Replace(".", "\"][\"") + "\"]");
                                 file.WriteLine("parameters[\"" + p.name.Replace(".", "\"][\"") + "\"] = " + p.value);
                                 count++;
                             }
                             else if (knownElements.Contains(p.dependencies.First()))
                             {
-                                knownElements.Add(p.guid);
+                                newKnownElements.Add(p.guid);
                                 values.Add(p.guid, values[p.dependencies.First()]);
                                 file.WriteLine("parameters[\"" + p.name.Replace(".", "\"][\"") + "\"] = " + values[p.dependencies.First()]);
                                 count++;
@@ -379,7 +380,7 @@ namespace ValueFlowInterpreter
                                     file.WriteLine("simpleResults.append(" + expressionString + ")");
 
                                     var valueString = "simpleResults[" + simpleResultsCount++ + "]";
-                                    knownElements.Add(f.guid);
+                                    newKnownElements.Add(f.guid);
                                     values.Add(f.guid, valueString);
                                     count++;
                                 }
@@ -394,7 +395,7 @@ namespace ValueFlowInterpreter
                                     file.WriteLine("complexResults.append(" + expressionString + ")");
 
                                     var valueString = "complexResults[" + complexResultsCount++ + "]";
-                                    knownElements.Add(f.guid);
+                                    newKnownElements.Add(f.guid);
                                     values.Add(f.guid, valueString);
                                     count++;
                                 }
@@ -409,15 +410,17 @@ namespace ValueFlowInterpreter
                                     foreach (var output in f.outputs)
                                     {
                                         var valueString = "pythonResults[" + pythonResultsCount + "][" + outputIndex++ + "]";
-                                        knownElements.Add(output);
+                                        newKnownElements.Add(output);
                                         values.Add(output, valueString);
                                         count++;
                                     }
-                                    knownElements.Add(f.guid);
+                                    newKnownElements.Add(f.guid);
                                     pythonResultsCount++;
                                 }
                             }
                         }
+                        knownElements.AddRange(newKnownElements);
+                        newKnownElements = new List<Guid>();
                     }
                     file.WriteLine("#------ Done! (No new values found.) -------");
                     file.WriteLine("");
