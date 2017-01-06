@@ -129,7 +129,7 @@ namespace ValueFlowInterpreterTest
             Assert.Equal(10, (int)result["AliasExample"]["P1"]);
             Assert.Equal(2, (int)result["AliasExample"]["P2"]);
 
-            Assert.Equal(8, (int)result["AliasExample"]["output"]);
+            Assert.Equal(8, (int)result["AliasExample"]["Output"]);
         }
 
         [Fact]
@@ -140,7 +140,8 @@ namespace ValueFlowInterpreterTest
             Assert.Equal(1.25, result["FractionExample"]["P_Decimal"]);
 
             Assert.Equal(1.5, result["FractionExample"]["SimpleOutput"]);
-            Assert.Equal((1 / 4) / 1.25, result["FractionExample"]["ComplexOutput"]);
+            var complexOutput = (1 / 4.0) / 1.25;
+            Assert.Equal(complexOutput, result["FractionExample"]["ComplexOutput"]);
         }
 
         [Fact]
@@ -151,7 +152,7 @@ namespace ValueFlowInterpreterTest
             Assert.Equal(5, (int)result["EmptyInputFormula"]["P_5"]);
             Assert.Equal(0, (int)result["EmptyInputFormula"]["P_Empty"]);
 
-            Assert.Equal(5, (int)result["EmptyInputFormula"]["output"]);
+            Assert.Equal(5, (int)result["EmptyInputFormula"]["Output"]);
         }        
 
         [Fact]
@@ -160,12 +161,12 @@ namespace ValueFlowInterpreterTest
         {
             var result = RunComponent("AliasExample2");
 
-            Assert.Equal(10, (int)result["AliasExample"]["P1"]);
-            Assert.Equal(2, (int)result["AliasExample"]["P2"]);
+            Assert.Equal(10, (int)result["AliasExample2"]["P1"]);
+            Assert.Equal(2, (int)result["AliasExample2"]["P2"]);
             Assert.Equal(-12, (int)result["AliasExample2"]["P12"]);
             Assert.Equal(-21, (int)result["AliasExample2"]["P21"]);
 
-            Assert.Equal(-33, (int)result["AliasExample2"]["output"]);
+            Assert.Equal(-33, (int)result["AliasExample2"]["Output"]);
         }
 
         private JObject RunComponent(string component_name)

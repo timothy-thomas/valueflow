@@ -46,7 +46,7 @@ namespace ValueFlowInterpreter
             }
             else
             {
-                return "(" + left + "/" + right + ")";
+                return "(" + left + "/float(" + right + "))";
             }
         }
 
@@ -180,6 +180,7 @@ namespace ValueFlowInterpreter
                     function = "abs";
                     break;
                 default:
+                    function = context.op.Text;
                     break;
             }
 

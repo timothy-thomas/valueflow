@@ -93,18 +93,25 @@ namespace ValueFlowInterpreter
             public FunctionType type;
             public string simpleType;
             public Dictionary<System.Guid, string> complexMapping;
-            public string body;
+            public string expression;
             public string python_filename;
             public List<System.Guid> outputs;
 
-            public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string simTy)
+            public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string func)
             {
                 constant = false;
                 name = nm;
                 guid = id;
                 dependencies = deps;
                 type = ty;
-                simpleType = simTy;
+                if (type == FunctionType.SIMPLE)
+                {
+                    simpleType = func;
+                }
+                else
+                {
+                    expression = func;
+                }
             }
 
             public static Dictionary<string, string> simpleFunctionTransform = new Dictionary<string, string>
@@ -116,17 +123,6 @@ namespace ValueFlowInterpreter
                 {"Maximum", "max"},
                 {"Minimum", "min"}
             };
-
-            public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, Dictionary<System.Guid, string> cm, String bd)
-            {
-                constant = false;
-                name = nm;
-                guid = id;
-                dependencies = deps;
-                type = ty;
-                complexMapping = cm;
-                body = bd;
-            }
 
             public Function(string nm, System.Guid id, List<System.Guid> deps, FunctionType ty, string fn, List<System.Guid> op)
             {
@@ -140,20 +136,29 @@ namespace ValueFlowInterpreter
             }
         }
 
-        void BuildLists(string parents, VF.Component component, List<string> components, List<Parameter> assignmentLines, List<Function> functions)
+        void BuildLists(string parents, VF.Component component, List<string> components, List<Parameter> parameters, List<Function> functions)
         {
             components.Add(parents + component.Name);
             parents = parents + component.Name + ".";
             foreach (var p in component.Children.ParameterCollection) {
                 if (!p.SrcConnections.ValueFlowCollection.Any()) // No incoming ValueFlow connections
                 {
-                    // Value is Constant
-                    assignmentLines.Add(new Parameter(parents + p.Name, p.Guid, p.Attributes.Value));
+                    // Value should already be assigned
+                    var value = p.Attributes.Value;
+                    if (value == null || value == "") // Looks like it wasn't assigned, after all
+                    {
+                        value = "0";
+                    }
+                    else if (value.Contains('/')) // To support single fraction inputs
+                    {
+                        value = "float(" + value.Replace("/", ")/");
+                    }
+                    parameters.Add(new Parameter(parents + p.Name, p.Guid, value));
                 }
                 else
                 {
                     var dep = p.SrcConnections.ValueFlowCollection.First().SrcEnd.Guid;
-                    assignmentLines.Add(new Parameter(parents + p.Name, p.Guid, dep));
+                    parameters.Add(new Parameter(parents + p.Name, p.Guid, dep));
                 }
             }
 
@@ -169,15 +174,46 @@ namespace ValueFlowInterpreter
 
             foreach (var f in component.Children.ComplexFormulaCollection)
             {
-                var body = f.Attributes.Expression.ToString();
-                var deps = new List<System.Guid>();
-                var table = new Dictionary<System.Guid, string>();
+                // Translate the MuParser expression to a python expression
+                AntlrInputStream input = new AntlrInputStream(f.Attributes.Expression.ToString());
+                MuParserLexer lexer = new MuParserLexer(input);
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                MuParserParser parser = new MuParserParser(tokens);
+                IParseTree tree = parser.expr();
+                MuParserToPythonVisitor visitor = new MuParserToPythonVisitor();
+                var pythonExpression = visitor.Visit(tree);
+
+                // Get all unique ID's referenced in complexFormula
+                ParseTreeWalker walker = new ParseTreeWalker();
+                IDListener listener = new IDListener();
+                walker.Walk(listener, tree);
+                var ids = listener.GetIDs().OrderByDescending(id => id.Length);
+
+                // Get mapping from IDs to Guids
+                var guids = new Dictionary<string, System.Guid>();
                 foreach (var flow in f.SrcConnections.ValueFlowCollection)
                 {
-                    deps.Add(flow.SrcEnd.Guid);
-                    table[flow.SrcEnd.Guid] = flow.Attributes.Name;
+                    if (flow.Attributes.Name == null || flow.Attributes.Name == "")
+                    {
+                        guids[flow.SrcEnd.Name] = flow.SrcEnd.Guid;
+                    }
+                    else
+                    {
+                        guids[flow.Attributes.Name] = flow.SrcEnd.Guid;
+                    }
                 }
-                functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.COMPLEX, table, body));
+
+                // Save ordered Guid list of dependencies
+                var deps = ids.Select(id => guids[id]).ToList();
+                
+                // Substitute template strings into pythonExpression to create templateExpression
+                var template = new StringBuilder(pythonExpression);
+                var i = 0;
+                foreach (var id in ids)
+                    template.Replace(id, "${" + i++ + "}");
+                var templateExpression = template.ToString();
+                
+                functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.COMPLEX, templateExpression));
             }
 
             foreach (var f in component.Children.PythonCollection)
@@ -214,7 +250,7 @@ namespace ValueFlowInterpreter
             }
 
             foreach (VF.Component c in component.Children.ComponentCollection) {
-                BuildLists(parents, c, components, assignmentLines, functions);
+                BuildLists(parents, c, components, parameters, functions);
             }
 
         }
@@ -290,20 +326,28 @@ namespace ValueFlowInterpreter
                     file.WriteLine("  return x");
                     file.WriteLine("");
 
+                    file.WriteLine("simpleResults = list()");
+                    file.WriteLine("complexResults = list()");
+                    file.WriteLine("pythonResults = list()");
+                    file.WriteLine("");
+
                     foreach (var c in components)
                     {
                         file.WriteLine("parameters[\"" + c.Replace(".", "\"][\"") + "\"] = dict()");
                     }
-                    file.WriteLine("pythonResults = list()");
 
                     var knownElements = new List<System.Guid>();
                     var values = new Dictionary<System.Guid, string>();
-                    int pythonResultCount = 0;
+                    int simpleResultsCount = 0;
+                    int complexResultsCount = 0;
+                    int pythonResultsCount = 0;
+                    int passIndex = 1;
 
                     int lastCount = -1;
                     int count = 0;
                     while (count > lastCount)
                     {
+                        file.WriteLine("\n#----------------- Pass " + passIndex++ + " ------------------");
                         lastCount = count;
                         foreach (var p in parameters.Where(p => !knownElements.Contains(p.guid)))
                         {
@@ -322,6 +366,7 @@ namespace ValueFlowInterpreter
                                 count++;
                             }
                         }
+                        file.WriteLine("");
 
                         foreach (var f in functions.Where(f => !knownElements.Contains(f.guid)))
                         {
@@ -330,34 +375,25 @@ namespace ValueFlowInterpreter
                             {
                                 if (f.type == Function.FunctionType.SIMPLE)
                                 {
-                                    var valueString = Function.simpleFunctionTransform[f.simpleType] + "(" + String.Join(",",f.dependencies.Select(x => values[x]).ToList()) + ")";
+                                    var expressionString = Function.simpleFunctionTransform[f.simpleType] + "(" + String.Join(",",f.dependencies.Select(x => values[x]).ToList()) + ")";
+                                    file.WriteLine("simpleResults.append(" + expressionString + ")");
+
+                                    var valueString = "simpleResults[" + simpleResultsCount++ + "]";
                                     knownElements.Add(f.guid);
                                     values.Add(f.guid, valueString);
                                     count++;
                                 }
                                 else if (f.type == Function.FunctionType.COMPLEX)
                                 {
-                                    var valueMapping = new Dictionary<string, string>();
-                                    foreach (var dep in f.dependencies)
-                                    {
-                                        valueMapping[f.complexMapping[dep]] = values[dep];
-                                    }
-                                    
-                                    // Translate the MuParser expression to a python expression
-                                    AntlrInputStream input = new AntlrInputStream(f.body);
-                                    MuParserLexer lexer = new MuParserLexer(input);
-                                    CommonTokenStream tokens = new CommonTokenStream(lexer);
-                                    MuParserParser parser = new MuParserParser(tokens);
-                                    IParseTree tree = parser.expr();
-                                    MuParserToPythonVisitor visitor = new MuParserToPythonVisitor();
-                                    var body = visitor.Visit(tree);
-
                                     // Replace the META variables with their respective Python variables
-                                    var output = new StringBuilder(body);
-                                    foreach (var kvp in valueMapping)
-                                        output.Replace(kvp.Key, kvp.Value);
-                                    var valueString = "(" + output.ToString() + ")";
+                                    var templateStringIndex = 0;
+                                    var output = new StringBuilder(f.expression);
+                                    foreach (var d in f.dependencies)
+                                        output.Replace("${" + templateStringIndex++ + "}", values[d]);
+                                    var expressionString = "(" + output.ToString() + ")";
+                                    file.WriteLine("complexResults.append(" + expressionString + ")");
 
+                                    var valueString = "complexResults[" + complexResultsCount++ + "]";
                                     knownElements.Add(f.guid);
                                     values.Add(f.guid, valueString);
                                     count++;
@@ -369,20 +405,21 @@ namespace ValueFlowInterpreter
                                     file.WriteLine("pythonResults.append("+ functionName + "." + functionName + "(");
                                     file.Write("    " + String.Join(",\n    ",f.dependencies.Select(x => values[x]).ToList()));
                                     file.WriteLine("))\n");
-                                    int i = 0;
+                                    int outputIndex = 0;
                                     foreach (var output in f.outputs)
                                     {
-                                        var valueString = "pythonResults[" + pythonResultCount + "][" + i++ + "]";
+                                        var valueString = "pythonResults[" + pythonResultsCount + "][" + outputIndex++ + "]";
                                         knownElements.Add(output);
                                         values.Add(output, valueString);
                                         count++;
                                     }
                                     knownElements.Add(f.guid);
-                                    pythonResultCount++;
+                                    pythonResultsCount++;
                                 }
                             }
                         }
                     }
+                    file.WriteLine("#------ Done! (No new values found.) -------");
                     file.WriteLine("");
                     file.WriteLine("print json.dumps(parameters, indent=2, sort_keys=True)");
                 }
