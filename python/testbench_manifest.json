@@ -1,0 +1,92 @@
+{
+  "Status": "UNEXECUTED", 
+  "CopyTestResults": false, 
+  "Parameters": [
+    {
+      "Description": "", 
+      "DisplayedName": null, 
+      "GMEID": null, 
+      "Value": "5", 
+      "Range": "-inf..inf", 
+      "ID": null, 
+      "Unit": "", 
+      "Name": "Length"
+    }, 
+    {
+      "Description": "", 
+      "DisplayedName": null, 
+      "GMEID": null, 
+      "Value": "7", 
+      "Range": "-inf..inf", 
+      "ID": null, 
+      "Unit": "", 
+      "Name": "Width"
+    }, 
+    {
+      "Description": "", 
+      "DisplayedName": null, 
+      "GMEID": null, 
+      "Value": "8", 
+      "Range": "-inf..inf", 
+      "ID": null, 
+      "Unit": "", 
+      "Name": "Height"
+    }
+  ], 
+  "Artifacts": [], 
+  "VisualizationArtifacts": [], 
+  "DesignName": "Component", 
+  "Metrics": [
+    {
+      "GMEID": null, 
+      "Description": "", 
+      "DisplayedName": "CD/CM Table", 
+      "VisualizationArtifacts": [], 
+      "Value": null, 
+      "ID": null, 
+      "Unit": "", 
+      "Name": "Volume"
+    }
+  ], 
+  "DesignID": null, 
+  "Steps": [
+    {
+      "ExecutionCompletionTimestamp": null, 
+      "Status": "UNEXECUTED", 
+      "Description": "Populates the 'output.py' script.", 
+      "Parameters": [], 
+      "ExecutionStartTimestamp": null, 
+      "Invocation": "python.exe stepPopulateTemplate.py", 
+      "PostProcess": null, 
+      "PreProcess": null, 
+      "LogFile": null, 
+      "Type": null
+    }, 
+    {
+      "ExecutionCompletionTimestamp": null, 
+      "Status": "UNEXECUTED", 
+      "Description": "Runs 'output_parameterized.py' script.", 
+      "Parameters": [], 
+      "ExecutionStartTimestamp": null, 
+      "Invocation": "python.exe output_parameterized.py", 
+      "PostProcess": null, 
+      "PreProcess": null, 
+      "LogFile": null, 
+      "Type": null
+    }, 
+    {
+      "ExecutionCompletionTimestamp": null, 
+      "Status": "UNEXECUTED", 
+      "Description": "Saves metrics from 'output.json'.", 
+      "Parameters": [], 
+      "ExecutionStartTimestamp": null, 
+      "Invocation": "python.exe stepSaveMetrics.py", 
+      "PostProcess": null, 
+      "PreProcess": null, 
+      "LogFile": null, 
+      "Type": null
+    }
+  ], 
+  "TestBench": "ValueFlowNetwork", 
+  "Created": null
+}
