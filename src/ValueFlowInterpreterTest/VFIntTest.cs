@@ -60,16 +60,16 @@ namespace ValueFlowInterpreterTest
         {
             var result = RunComponent("ComplexExample");
 
-            Assert.True((int)result["ComplexExample"]["Box1Height"] == 8);
-            Assert.True((int)result["ComplexExample"]["Box1Length"] == 10);
-            Assert.True((int)result["ComplexExample"]["Box1Width"] == 13);
-            Assert.True((int)result["ComplexExample"]["Box2Height"] == 20);
-            Assert.True((int)result["ComplexExample"]["Box2Length"] == 10);
-            Assert.True((int)result["ComplexExample"]["Box2Width"] == 7);
-            Assert.True((int)result["ComplexExample"]["ComplexContainer"]["Height"] == 28);
-            Assert.True((int)result["ComplexExample"]["ComplexContainer"]["Width"] == 13);
-            Assert.True((int)result["ComplexExample"]["ComplexContainer"]["Length"] == 10);
-            Assert.True((int)result["ComplexExample"]["ComplexContainer"]["Volume"] == 3640);
+            Assert.Equal( 8, result["ComplexExample"]["Box1Height"]);
+            Assert.Equal( 10, result["ComplexExample"]["Box1Length"]);
+            Assert.Equal( 13, result["ComplexExample"]["Box1Width"]);
+            Assert.Equal( 20, result["ComplexExample"]["Box2Height"]);
+            Assert.Equal( 10, result["ComplexExample"]["Box2Length"]);
+            Assert.Equal( 7, result["ComplexExample"]["Box2Width"]);
+            Assert.Equal( 28, result["ComplexExample"]["ComplexContainer"]["Height"]);
+            Assert.Equal( 13, result["ComplexExample"]["ComplexContainer"]["Width"]);
+            Assert.Equal( 10, result["ComplexExample"]["ComplexContainer"]["Length"]);
+            Assert.Equal( 3640, result["ComplexExample"]["ComplexContainer"]["Volume"]);
         }
 
         [Fact]
@@ -102,24 +102,24 @@ namespace ValueFlowInterpreterTest
         {
             var result = RunComponent("FullExample");
 
-            Assert.True((int)result["FullExample"]["Box1Height"] == 8);
-            Assert.True((int)result["FullExample"]["Box1Length"] == 10);
-            Assert.True((int)result["FullExample"]["Box1Width"] == 13);
-            Assert.True((int)result["FullExample"]["Box2Height"] == 20);
-            Assert.True((int)result["FullExample"]["Box2Length"] == 10);
-            Assert.True((int)result["FullExample"]["Box2Width"] == 7);
-            Assert.True((int)result["FullExample"]["ComplexContainer"]["Height"] == 28);
-            Assert.True((int)result["FullExample"]["ComplexContainer"]["Width"] == 13);
-            Assert.True((int)result["FullExample"]["ComplexContainer"]["Length"] == 10);
-            Assert.True((int)result["FullExample"]["ComplexContainer"]["Volume"] == 3640);
-            Assert.True((int)result["FullExample"]["PythonContainer"]["Height"] == 28);
-            Assert.True((int)result["FullExample"]["PythonContainer"]["Width"] == 20);
-            Assert.True((int)result["FullExample"]["PythonContainer"]["Length"] == 20);
-            Assert.True((int)result["FullExample"]["PythonContainer"]["Volume"] == 11200);
-            Assert.True((int)result["FullExample"]["SimpleContainer"]["Height"] == 28);
-            Assert.True((int)result["FullExample"]["SimpleContainer"]["Width"] == 13);
-            Assert.True((int)result["FullExample"]["SimpleContainer"]["Length"] == 10);
-            Assert.True((int)result["FullExample"]["SimpleContainer"]["Volume"] == 3640);
+            Assert.Equal( 8, result["FullExample"]["Box1Height"]);
+            Assert.Equal( 10, result["FullExample"]["Box1Length"]);
+            Assert.Equal( 13, result["FullExample"]["Box1Width"]);
+            Assert.Equal( 20, result["FullExample"]["Box2Height"]);
+            Assert.Equal( 10, result["FullExample"]["Box2Length"]);
+            Assert.Equal( 7, result["FullExample"]["Box2Width"]);
+            Assert.Equal( 28, result["FullExample"]["ComplexContainer"]["Height"]);
+            Assert.Equal( 13, result["FullExample"]["ComplexContainer"]["Width"]);
+            Assert.Equal( 10, result["FullExample"]["ComplexContainer"]["Length"]);
+            Assert.Equal( 3640, result["FullExample"]["ComplexContainer"]["Volume"]);
+            Assert.Equal( 28, result["FullExample"]["PythonContainer"]["Height"]);
+            Assert.Equal( 20, result["FullExample"]["PythonContainer"]["Width"]);
+            Assert.Equal( 20, result["FullExample"]["PythonContainer"]["Length"]);
+            Assert.Equal( 11200, result["FullExample"]["PythonContainer"]["Volume"]);
+            Assert.Equal( 28, result["FullExample"]["SimpleContainer"]["Height"]);
+            Assert.Equal( 13, result["FullExample"]["SimpleContainer"]["Width"]);
+            Assert.Equal( 10, result["FullExample"]["SimpleContainer"]["Length"]);
+            Assert.Equal( 3640, result["FullExample"]["SimpleContainer"]["Volume"]);
         }
 
         [Fact]
@@ -127,12 +127,12 @@ namespace ValueFlowInterpreterTest
         {
             var result = RunComponent("ParamOnlyExample1");
 
-            Assert.True((int)result["ParamOnlyExample1"]["Box1Height"] == 2);
-            Assert.True((int)result["ParamOnlyExample1"]["Box1Length"] == 10);
-            Assert.True((int)result["ParamOnlyExample1"]["Box1Width"] == 13);
-            Assert.True((int)result["ParamOnlyExample1"]["SimpleContainer"]["Height"] == 2);
-            Assert.True((int)result["ParamOnlyExample1"]["SimpleContainer"]["Width"] == 13);
-            Assert.True((int)result["ParamOnlyExample1"]["SimpleContainer"]["Length"] == 10);
+            Assert.Equal( 2, result["ParamOnlyExample1"]["Box1Height"]);
+            Assert.Equal( 10, result["ParamOnlyExample1"]["Box1Length"]);
+            Assert.Equal( 13, result["ParamOnlyExample1"]["Box1Width"]);
+            Assert.Equal( 2, result["ParamOnlyExample1"]["SimpleContainer"]["Height"]);
+            Assert.Equal( 13, result["ParamOnlyExample1"]["SimpleContainer"]["Width"]);
+            Assert.Equal( 10, result["ParamOnlyExample1"]["SimpleContainer"]["Length"]);
         }
 
         [Fact]
@@ -140,15 +140,15 @@ namespace ValueFlowInterpreterTest
         {
             var result = RunComponent("ParamOnlyExample2");
 
-            Assert.True((int)result["ParamOnlyExample2"]["Box1Height"] == 2);
-            Assert.True((int)result["ParamOnlyExample2"]["Box1Length"] == 10);
-            Assert.True((int)result["ParamOnlyExample2"]["Box1Width"] == 13);
-            Assert.True((int)result["ParamOnlyExample2"]["HeightSameLevel"] == 2);
-            Assert.True((int)result["ParamOnlyExample2"]["SimpleContainer"]["Height"] == 2);
-            Assert.True((int)result["ParamOnlyExample2"]["SimpleContainer"]["Width"] == 13);
-            Assert.True((int)result["ParamOnlyExample2"]["SimpleContainer"]["Length"] == 10);
-            Assert.True((int)result["ParamOnlyExample2"]["SimpleContainer"]["Volume"] == 25);
-            Assert.True((int)result["ParamOnlyExample2"]["VolumeFromContainer"] == 25);
+            Assert.Equal( 2, result["ParamOnlyExample2"]["Box1Height"]);
+            Assert.Equal( 10, result["ParamOnlyExample2"]["Box1Length"]);
+            Assert.Equal( 13, result["ParamOnlyExample2"]["Box1Width"]);
+            Assert.Equal( 2, result["ParamOnlyExample2"]["HeightSameLevel"]);
+            Assert.Equal( 2, result["ParamOnlyExample2"]["SimpleContainer"]["Height"]);
+            Assert.Equal( 13, result["ParamOnlyExample2"]["SimpleContainer"]["Width"]);
+            Assert.Equal( 10, result["ParamOnlyExample2"]["SimpleContainer"]["Length"]);
+            Assert.Equal( 25, result["ParamOnlyExample2"]["SimpleContainer"]["Volume"]);
+            Assert.Equal( 25, result["ParamOnlyExample2"]["VolumeFromContainer"]);
         }
 
         [Fact]
@@ -156,16 +156,16 @@ namespace ValueFlowInterpreterTest
         {
             var result = RunComponent("PythonExample");
 
-            Assert.True((int)result["PythonExample"]["Box1Height"] == 8);
-            Assert.True((int)result["PythonExample"]["Box1Length"] == 10);
-            Assert.True((int)result["PythonExample"]["Box1Width"] == 13);
-            Assert.True((int)result["PythonExample"]["Box2Height"] == 20);
-            Assert.True((int)result["PythonExample"]["Box2Length"] == 10);
-            Assert.True((int)result["PythonExample"]["Box2Width"] == 7);
-            Assert.True((int)result["PythonExample"]["PythonContainer"]["Height"] == 28);
-            Assert.True((int)result["PythonExample"]["PythonContainer"]["Width"] == 20);
-            Assert.True((int)result["PythonExample"]["PythonContainer"]["Length"] == 20);
-            Assert.True((int)result["PythonExample"]["PythonContainer"]["Volume"] == 11200);
+            Assert.Equal( 8, result["PythonExample"]["Box1Height"]);
+            Assert.Equal( 10, result["PythonExample"]["Box1Length"]);
+            Assert.Equal( 13, result["PythonExample"]["Box1Width"]);
+            Assert.Equal( 20, result["PythonExample"]["Box2Height"]);
+            Assert.Equal( 10, result["PythonExample"]["Box2Length"]);
+            Assert.Equal( 7, result["PythonExample"]["Box2Width"]);
+            Assert.Equal( 28, result["PythonExample"]["PythonContainer"]["Height"]);
+            Assert.Equal( 20, result["PythonExample"]["PythonContainer"]["Width"]);
+            Assert.Equal( 20, result["PythonExample"]["PythonContainer"]["Length"]);
+            Assert.Equal( 11200, result["PythonExample"]["PythonContainer"]["Volume"]);
         }
 
         [Fact]
@@ -173,16 +173,16 @@ namespace ValueFlowInterpreterTest
         {
             var result = RunComponent("SimpleExample");
 
-            Assert.True((int)result["SimpleExample"]["Box1Height"] == 2);
-            Assert.True((int)result["SimpleExample"]["Box1Length"] == 10);
-            Assert.True((int)result["SimpleExample"]["Box1Width"] == 13);
-            Assert.True((int)result["SimpleExample"]["Box2Height"] == 20);
-            Assert.True((int)result["SimpleExample"]["Box2Length"] == 10);
-            Assert.True((int)result["SimpleExample"]["Box2Width"] == 7);
-            Assert.True((int)result["SimpleExample"]["SimpleContainer"]["Height"] == 22);
-            Assert.True((int)result["SimpleExample"]["SimpleContainer"]["Width"] == 13);
-            Assert.True((int)result["SimpleExample"]["SimpleContainer"]["Length"] == 10);
-            Assert.True((int)result["SimpleExample"]["SimpleContainer"]["Volume"] == 2860);
+            Assert.Equal( 2, result["SimpleExample"]["Box1Height"]);
+            Assert.Equal( 10, result["SimpleExample"]["Box1Length"]);
+            Assert.Equal( 13, result["SimpleExample"]["Box1Width"]);
+            Assert.Equal( 20, result["SimpleExample"]["Box2Height"]);
+            Assert.Equal( 10, result["SimpleExample"]["Box2Length"]);
+            Assert.Equal( 7, result["SimpleExample"]["Box2Width"]);
+            Assert.Equal( 22, result["SimpleExample"]["SimpleContainer"]["Height"]);
+            Assert.Equal( 13, result["SimpleExample"]["SimpleContainer"]["Width"]);
+            Assert.Equal( 10, result["SimpleExample"]["SimpleContainer"]["Length"]);
+            Assert.Equal( 2860, result["SimpleExample"]["SimpleContainer"]["Volume"]);
         }
 
         private JObject RunComponent(string component_name)
