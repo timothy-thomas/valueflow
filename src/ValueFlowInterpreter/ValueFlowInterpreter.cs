@@ -210,7 +210,7 @@ namespace ValueFlowInterpreter
                 var template = new StringBuilder(pythonExpression);
                 var i = 0;
                 foreach (var id in ids)
-                    template.Replace(id, "${" + i++ + "}");
+                    template.Replace(id, "$" + i++);
                 var templateExpression = template.ToString();
                 
                 functions.Add(new Function(parents + f.Name, f.Guid, deps, Function.FunctionType.COMPLEX, templateExpression));
@@ -390,7 +390,7 @@ namespace ValueFlowInterpreter
                                     var templateStringIndex = 0;
                                     var output = new StringBuilder(f.expression);
                                     foreach (var d in f.dependencies)
-                                        output.Replace("${" + templateStringIndex++ + "}", values[d]);
+                                        output.Replace("$" + templateStringIndex++, values[d]);
                                     var expressionString = "(" + output.ToString() + ")";
                                     file.WriteLine("complexResults.append(" + expressionString + ")");
 
@@ -425,6 +425,9 @@ namespace ValueFlowInterpreter
                     file.WriteLine("#------ Done! (No new values found.) -------");
                     file.WriteLine("");
                     file.WriteLine("print json.dumps(parameters, indent=2, sort_keys=True)");
+                    file.WriteLine("");
+                    file.WriteLine("with open('output.json', 'w') as f_out:");
+                    file.WriteLine("    json.dump(parameters, f_out, indent=2, sort_keys=True)");
                 }
             }
 

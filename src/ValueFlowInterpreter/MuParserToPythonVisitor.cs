@@ -9,7 +9,7 @@ namespace ValueFlowInterpreter
 {
     class MuParserToPythonVisitor : MuParserBaseVisitor<string>
     {
-        public override string VisitTestExpr([NotNull] MuParserParser.TestExprContext context)
+        public override string VisitProgExpr([NotNull] MuParserParser.ProgExprContext context)
         {
             var testCases = new StringBuilder();
             testCases.Append("import math\n");
